@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global theme: AI / cyber teaching demo */
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html[data-theme='light'] {
+    color-scheme: light;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: radial-gradient(1200px 800px at 20% 15%, rgba(68, 255, 216, 0.16), transparent 55%),
+      radial-gradient(1000px 700px at 80% 30%, rgba(120, 110, 255, 0.18), transparent 50%),
+      radial-gradient(900px 650px at 45% 90%, rgba(255, 62, 166, 0.12), transparent 55%),
+      linear-gradient(180deg, #070812, #05060d 60%, #060714);
+    color: rgba(255, 255, 255, 0.92);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+      "Apple Color Emoji", "Segoe UI Emoji";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html[data-theme='light'] body {
+    background: radial-gradient(1200px 800px at 20% 15%, rgba(56, 189, 248, 0.12), transparent 55%),
+      radial-gradient(1000px 700px at 80% 30%, rgba(99, 102, 241, 0.1), transparent 50%),
+      radial-gradient(900px 650px at 45% 90%, rgba(168, 85, 247, 0.08), transparent 55%),
+      linear-gradient(180deg, #f8fafc, #f1f5f9 60%, #eef2ff);
+    color: rgba(15, 23, 42, 0.92);
+  }
+
+  ::selection {
+    background: rgba(120, 110, 255, 0.35);
+  }
+
+  html[data-theme='light'] ::selection {
+    background: rgba(59, 130, 246, 0.22);
+  }
+
+  html[data-theme='light'] .from-gray-900 {
+    --tw-gradient-from: rgb(248 250 252) var(--tw-gradient-from-position) !important;
+    --tw-gradient-to: rgb(248 250 252 / 0) var(--tw-gradient-to-position) !important;
+  }
+
+  html[data-theme='light'] .via-black {
+    --tw-gradient-to: rgb(241 245 249 / 0) var(--tw-gradient-to-position) !important;
+    --tw-gradient-stops: var(--tw-gradient-from), rgb(241 245 249) var(--tw-gradient-via-position),
+      var(--tw-gradient-to) !important;
+  }
+
+  html[data-theme='light'] .to-gray-900 {
+    --tw-gradient-to: rgb(238 242 255) var(--tw-gradient-to-position) !important;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_20px_80px_-30px_rgba(0,0,0,0.8)];
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold
+      bg-white/10 hover:bg-white/15 border border-white/10 hover:border-white/20
+      transition active:scale-[0.99];
+  }
+  .btn-primary {
+    @apply bg-gradient-to-r from-cyan-300/25 via-indigo-300/20 to-fuchsia-300/25
+      border-white/15 hover:border-white/25 hover:bg-white/10;
+  }
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold
+      bg-white/5 border border-white/10;
+  }
+  .neon-border {
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset, 0 0 0 1px rgba(74, 222, 255, 0.12),
+      0 0 40px rgba(74, 222, 255, 0.08);
+  }
+  .scanline {
+    background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.06) 0px,
+      rgba(255, 255, 255, 0.02) 2px,
+      transparent 6px
+    );
+    background-size: 100% 10px;
+    mix-blend-mode: overlay;
+    opacity: 0.25;
+  }
+
+  html[data-theme='light'] .glass {
+    @apply bg-white/85 border-slate-200 shadow-none;
+  }
+
+  html[data-theme='light'] .btn {
+    @apply bg-slate-900/5 border-slate-300 text-slate-700 hover:bg-slate-900/10 hover:border-slate-400;
+  }
+
+  html[data-theme='light'] .btn-primary {
+    @apply bg-cyan-500/15 border-cyan-500/35 text-cyan-800 hover:bg-cyan-500/20;
+  }
+
+  html[data-theme='light'] .chip {
+    @apply bg-slate-900/5 border-slate-300 text-slate-700;
+  }
+
+  html[data-theme='light'] .neon-border {
+    box-shadow: 0 0 0 1px rgba(51, 65, 85, 0.08) inset, 0 0 0 1px rgba(14, 165, 233, 0.16),
+      0 0 26px rgba(56, 189, 248, 0.14);
+  }
+
+  html[data-theme='light'] [class*='text-white'] {
+    color: rgb(30 41 59 / 0.92) !important;
+  }
+
+  html[data-theme='light'] [class*='bg-black'] {
+    background-color: rgb(248 250 252 / 0.9) !important;
+  }
+
+  html[data-theme='light'] [class*='bg-white/'] {
+    background-color: rgb(255 255 255 / 0.92) !important;
+  }
+
+  html[data-theme='light'] [class*='border-white'] {
+    border-color: rgb(203 213 225 / 0.9) !important;
+  }
+}
