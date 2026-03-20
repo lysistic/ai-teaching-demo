@@ -268,7 +268,7 @@ export function TeacherAnalytics() {
           </div>
 
           <div className="mt-5 grid gap-5 md:grid-cols-2">
-            <div className="h-[300px] rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 p-3">
+            <div className="h-[300px] rounded-2xl border border-slate-200 dark:border-white/10 bg-white/5 dark:bg-black/20 p-3">
               <div className="mb-3 flex items-center justify-between px-2">
                 <div className="text-base font-semibold text-slate-800 dark:text-white/80">课前诊断 vs 课后掌握</div>
                 <div className="text-sm text-white/55">课后结果已纳入 50% 权重</div>
@@ -294,10 +294,10 @@ export function TeacherAnalytics() {
               </ResponsiveContainer>
             </div>
 
-            <div className="h-[300px] rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 p-3">
+            <div className="h-[300px] rounded-2xl border border-slate-200 dark:border-white/10 bg-white/5 dark:bg-black/20 p-3">
               <div className="mb-3 flex items-center justify-between px-2">
                 <div className="text-base font-semibold text-slate-800 dark:text-white/80">互动完成情况</div>
-                <div className="text-sm text-white/55">纯前端静态数据演示</div>
+                <div className="text-sm text-white/55">多维度实时学情追踪</div>
               </div>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={interactionCompletionData} layout="vertical">

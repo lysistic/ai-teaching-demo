@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global theme: AI / cyber teaching demo */
+/* Global theme: AI / cyber teaching system */
 @layer base {
   :root {
     color-scheme: dark;
@@ -10,6 +10,10 @@
 
   html[data-theme='light'] {
     color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
   }
 
   html,

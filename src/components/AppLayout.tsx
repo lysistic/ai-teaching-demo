@@ -68,7 +68,9 @@ export function AppLayout() {
   }, [location.pathname])
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', themeMode)
+    document.documentElement.setAttribute('data-theme', themeMode);
+    if (themeMode === 'dark') document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
     window.localStorage.setItem('theme-mode', themeMode)
   }, [themeMode])
 
@@ -114,7 +116,7 @@ export function AppLayout() {
           </div>
           <div className="flex flex-col overflow-hidden">
             <h1 className="truncate text-lg font-bold tracking-tight">AI教学平台</h1>
-            <span className="truncate text-xs text-slate-500 mix-blend-luminosity">创新大赛演示版</span>
+            <span className="truncate text-xs text-slate-500 mix-blend-luminosity">教学创新大赛核心系统</span>
           </div>
         </div>
 

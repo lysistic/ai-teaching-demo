@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react'
+import fs from 'fs';
+
+const code = `import { useState, useEffect } from 'react'
 import { Brain, Code, Cpu, Terminal, CheckCircle, FileCode, Play, RefreshCw, Save, ChevronRight, ChevronLeft } from 'lucide-react'
 import { cn } from '../lib/cn'
 
@@ -9,7 +11,7 @@ const mockProblems = [
     title: '两数之和',
     difficulty: '简单',
     tags: ['数组', '哈希表'],
-    description: `## 题目描述
+    description: \`## 题目描述
 
 给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出和为目标值 target 的那两个整数，并返回它们的数组下标。
 
@@ -39,8 +41,8 @@ const mockProblems = [
 - 只会存在一个有效答案
 
 ## 进阶
-你可以想出一个时间复杂度小于 O(n^2) 的算法吗？`,
-    starterCode: `function twoSum(nums: number[], target: number): number[] {
+你可以想出一个时间复杂度小于 O(n^2) 的算法吗？\`,
+    starterCode: \`function twoSum(nums: number[], target: number): number[] {
     // 在这里编写你的代码
     // 提示：可以使用哈希表来优化时间复杂度
     const map = new Map<number, number>();
@@ -54,7 +56,7 @@ const mockProblems = [
     }
     
     return [];
-}`,
+}\`,
     testCases: [
       { input: [[2,7,11,15], 9], output: [0,1] },
       { input: [[3,2,4], 6], output: [1,2] },
@@ -68,7 +70,7 @@ const mockProblems = [
     title: '最长公共前缀',
     difficulty: '简单',
     tags: ['字符串'],
-    description: `## 题目描述
+    description: \`## 题目描述
 
 编写一个函数来查找字符串数组中的最长公共前缀。
 
@@ -88,8 +90,8 @@ const mockProblems = [
 ## 提示
 - 1 <= strs.length <= 200
 - 0 <= strs[i].length <= 200
-- strs[i] 仅由小写英文字母组成`,
-    starterCode: `function longestCommonPrefix(strs: string[]): string {
+- strs[i] 仅由小写英文字母组成\`,
+    starterCode: \`function longestCommonPrefix(strs: string[]): string {
     if (strs.length === 0) return "";
     
     // 以第一个字符串为基准
@@ -103,7 +105,7 @@ const mockProblems = [
     }
     
     return prefix;
-}`,
+}\`,
     testCases: [
       { input: [["flower","flow","flight"]], output: "fl" },
       { input: [["dog","racecar","car"]], output: "" },
@@ -116,7 +118,7 @@ const mockProblems = [
     title: '有效的括号',
     difficulty: '简单',
     tags: ['栈', '字符串'],
-    description: `## 题目描述
+    description: \`## 题目描述
 
 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。
 
@@ -149,8 +151,8 @@ const mockProblems = [
 
 ## 提示
 - 1 <= s.length <= 10^4
-- s 仅由括号 '()[]{}' 组成`,
-    starterCode: `function isValid(s: string): boolean {
+- s 仅由括号 '()[]{}' 组成\`,
+    starterCode: \`function isValid(s: string): boolean {
     const stack: string[] = [];
     const map: { [key: string]: string } = {
         ')': '(',
@@ -169,7 +171,7 @@ const mockProblems = [
     }
     
     return stack.length === 0;
-}`,
+}\`,
     testCases: [
       { input: ["()"], output: true },
       { input: ["()[]{}"], output: true },
@@ -192,7 +194,7 @@ type SubmissionResult = {
 
 // 格式化题目描述文本
 const formatDescription = (text: string) => {
-  return text.split('\n').map((line, index) => {
+  return text.split('\\n').map((line, index) => {
     if (line.startsWith('## ')) {
       return <h3 key={index} className="text-lg font-semibold text-slate-900 dark:text-white/90 mt-4 mb-2">{line.substring(3)}</h3>
     } else if (line.startsWith('**')) {
@@ -245,11 +247,11 @@ export function StudentOJ() {
         status,
         message: status === 'Accepted' 
           ? '恭喜！所有测试用例都通过了。' 
-          : `有 ${total - passed} 个测试用例未通过。`,
+          : \`有 \${total - passed} 个测试用例未通过。\`,
         passedTests: passed,
         totalTests: total,
-        runtime: `${Math.random() * 10 + 1}ms`,
-        memory: `${(Math.random() * 5 + 40).toFixed(1)}MB`
+        runtime: \`\${Math.random() * 10 + 1}ms\`,
+        memory: \`\${(Math.random() * 5 + 40).toFixed(1)}MB\`
       })
       setIsRunning(false)
     }, 1500)
@@ -274,13 +276,13 @@ export function StudentOJ() {
           : '提交失败，请检查你的代码逻辑。',
         passedTests: passed,
         totalTests: total,
-        runtime: `${Math.random() * 10 + 1}ms`,
-        memory: `${(Math.random() * 5 + 40).toFixed(1)}MB`
+        runtime: \`\${Math.random() * 10 + 1}ms\`,
+        memory: \`\${(Math.random() * 5 + 40).toFixed(1)}MB\`
       })
 
       // 生成AI反馈
       if (status === 'Accepted') {
-        setAiFeedback(`🎉 优秀！你的解法通过了所有测试用例。
+        setAiFeedback(\`🎉 优秀！你的解法通过了所有测试用例。
 
 💡 **代码亮点：**
 - 时间复杂度：O(n)，空间复杂度：O(n)，这是最优解法
@@ -294,10 +296,10 @@ export function StudentOJ() {
 
 🔍 **进阶挑战：**
 - 如果要求返回所有可能的组合，而不是唯一解，你会如何修改代码？
-- 如果数组非常大（超过10^6个元素），你的算法还能正常工作吗？`)
+- 如果数组非常大（超过10^6个元素），你的算法还能正常工作吗？\`)
         setShowAiAnalysis(true);
       } else {
-        setAiFeedback(`🤔 你的代码没有通过所有测试用例。
+        setAiFeedback(\`🤔 你的代码没有通过所有测试用例。
 
 🔍 **可能的问题：**
 1. 边界条件处理不完整
@@ -312,7 +314,7 @@ export function StudentOJ() {
 📚 **学习资源：**
 - 复习哈希表的基本操作
 - 理解两数之和问题的经典解法
-- 练习更多类似题目来巩固知识`)
+- 练习更多类似题目来巩固知识\`)
         setShowAiAnalysis(true);
       }
 
@@ -547,7 +549,7 @@ export function StudentOJ() {
             <button onClick={() => setShowAiAnalysis(false)} className="text-white/40 hover:text-white/80 transition-colors">✕</button>
           </div>
           <div className="prose prose-sm prose-invert mt-2 text-white/80 leading-relaxed max-h-[60vh] overflow-y-auto app-scrollbar pr-2">
-            {aiFeedback.split('\n').map((line, i) => (
+            {aiFeedback.split('\\n').map((line, i) => (
                <p key={i} className="my-1">{line}</p>
             ))}
           </div>
@@ -556,3 +558,7 @@ export function StudentOJ() {
     </div>
   )
 }
+`
+
+fs.writeFileSync('src/pages/StudentOJ.tsx', code);
+console.log('Successfully wrote new layout to StudentOJ.tsx');

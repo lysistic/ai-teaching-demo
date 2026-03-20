@@ -49,7 +49,7 @@ export function StudentHome() {
             </p>
             <button
               onClick={() => navigate('/student/qa')}
-              className="mt-6 flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-indigo-600 shadow-sm transition-colors hover:bg-indigo-50"
+              className="mt-6 flex items-center gap-2 rounded-lg bg-white dark:bg-slate-900 px-4 py-2 text-sm font-semibold text-indigo-600 shadow-sm transition-colors hover:bg-indigo-50"
             >
               立刻进入
               <ArrowRight className="h-4 w-4" />
@@ -58,7 +58,7 @@ export function StudentHome() {
         </div>
 
         {/* 编程练习入口 */}
-        <div className="group relative overflow-hidden rounded-2xl border bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md dark:border-slate-800 dark:bg-slate-900/50">
+        <div className="group relative overflow-hidden rounded-2xl border bg-white dark:bg-slate-900 p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md dark:border-slate-800 dark:bg-slate-900/50">
           <div className="relative z-10">
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-violet-100 text-violet-600 dark:bg-violet-500/20 dark:text-violet-400">
               <Code className="h-6 w-6" />
@@ -78,7 +78,7 @@ export function StudentHome() {
         </div>
 
         {/* 课件资源入口 */}
-        <div className="group relative overflow-hidden rounded-2xl border bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md dark:border-slate-800 dark:bg-slate-900/50">
+        <div className="group relative overflow-hidden rounded-2xl border bg-white dark:bg-slate-900 p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md dark:border-slate-800 dark:bg-slate-900/50">
           <div className="relative z-10">
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400">
               <BookOpen className="h-6 w-6" />
@@ -100,7 +100,7 @@ export function StudentHome() {
 
       {/* 学习动态概览 */}
       <div className="grid gap-6 lg:grid-cols-2">
-        <div className="rounded-2xl border bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/50">
+        <div className="rounded-2xl border bg-white dark:bg-slate-900 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/50">
           <h3 className="flex items-center gap-2 font-bold">
             <Activity className="h-5 w-5 text-indigo-500" />
             近日学习动态
@@ -124,12 +124,12 @@ export function StudentHome() {
           </div>
         </div>
 
-        <div className="rounded-2xl border bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/50">
+        <div className="rounded-2xl border bg-white dark:bg-slate-900 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/50">
           <h3 className="flex items-center gap-2 font-bold">
             <Award className="h-5 w-5 text-amber-500" />
             学情简报
           </h3>
-          <div className="mt-6 flex items-center justify-between rounded-xl bg-slate-50 p-4 dark:bg-slate-800/50">
+          <div className="mt-6 flex items-center justify-between rounded-xl bg-slate-50 dark:bg-slate-800/40 p-4 dark:bg-slate-800/50">
             <div className="flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 dark:bg-indigo-500/20 dark:text-indigo-400">
                 <Code className="h-5 w-5" />
@@ -142,7 +142,7 @@ export function StudentHome() {
             <span className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">85%</span>
           </div>
           
-          <div className="mt-4 flex items-center justify-between rounded-xl bg-slate-50 p-4 dark:bg-slate-800/50">
+          <div className="mt-4 flex items-center justify-between rounded-xl bg-slate-50 dark:bg-slate-800/40 p-4 dark:bg-slate-800/50">
             <div className="flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400">
                 <PlayCircle className="h-5 w-5" />

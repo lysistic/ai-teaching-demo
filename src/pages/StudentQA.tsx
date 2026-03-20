@@ -29,7 +29,7 @@ import { cn } from '../lib/cn'
 import {
   counterExampleForB,
   counterExampleForC,
-  demoTasks,
+  coreTasks,
   runStrategy,
   type StrategyKey,
 } from '../lib/intervalScheduling'
@@ -218,8 +218,8 @@ function buildAiFeedback(choice: StrategyKey, scenario: ScenarioKey) {
   const stageIntro = `> **当前阶段：${scenarioConfig[scenario].title}**  ${scenarioConfig[scenario].focus}`
 
   if (choice === correct) {
-    const rA = runStrategy('A', demoTasks)
-    const rD = runStrategy('D', demoTasks)
+    const rA = runStrategy('A', coreTasks)
+    const rD = runStrategy('D', coreTasks)
     const same = rA.score.count === rD.score.count
 
     return [
@@ -241,7 +241,7 @@ function buildAiFeedback(choice: StrategyKey, scenario: ScenarioKey) {
       `## ❌ 不是最优："最早开始时间"`,
       stageIntro,
       `> **直觉陷阱**：开始最早的任务可能"持续时间很长"，会挡住后面多个短任务。`,
-      `### 反例演示\n假设有 3 个任务：\n- 任务 1: [0, 10]（开始最早，但持续很久）\n- 任务 2: [1, 2]（开始稍晚，但很快结束）\n- 任务 3: [3, 4]（开始更晚，也很快结束）\n\n按"最早开始"会选择任务 1（只能选 1 个），但最优解是选任务 2+3（能选 2 个）。`,
+      `### 反例推演\n假设有 3 个任务：\n- 任务 1: [0, 10]（开始最早，但持续很久）\n- 任务 2: [1, 2]（开始稍晚，但很快结束）\n- 任务 3: [3, 4]（开始更晚，也很快结束）\n\n按"最早开始"会选择任务 1（只能选 1 个），但最优解是选任务 2+3（能选 2 个）。`,
       `### 实际运行结果\n- B（最早开始）：选中 **${rB.score.count}** 个\n- A（最早结束）：选中 **${rA.score.count}** 个\n- D（暴力最优）：选中 **${rD.score.count}** 个`,
       `### 提示\n- 弱提示：如果你想"尽量不挡后面的人"，应该关心任务何时**结束**，而不是何时**开始**\n- 强提示：**结束越早越好**，这样能为后续保留更多选择空间`,
       stageTail[scenario],
@@ -256,15 +256,15 @@ function buildAiFeedback(choice: StrategyKey, scenario: ScenarioKey) {
       `## ❌ 不是最优："最短任务间隔"`,
       stageIntro,
       `> **直觉陷阱**：短任务≠最优。多个短任务可能互相冲突，反而不如一个更合理的组合。`,
-      `### 反例演示\n假设有 3 个任务：\n- 任务 1: [0, 2]（很短）\n- 任务 2: [1, 3]（也很短，但与任务 1 冲突）\n- 任务 3: [4, 10]（较长，但能和前面形成不同取舍）\n\n按"最短优先"会只盯着区间长度，却忽略了后续能否兼容更多任务。`,
+      `### 反例推演\n假设有 3 个任务：\n- 任务 1: [0, 2]（很短）\n- 任务 2: [1, 3]（也很短，但与任务 1 冲突）\n- 任务 3: [4, 10]（较长，但能和前面形成不同取舍）\n\n按"最短优先"会只盯着区间长度，却忽略了后续能否兼容更多任务。`,
       `### 实际运行结果\n- C（最短间隔）：选中 **${rC.score.count}** 个\n- A（最早结束）：选中 **${rA.score.count}** 个\n- D（暴力最优）：选中 **${rD.score.count}** 个`,
       `### 思考题\n如果你的目标是"最大化可兼容任务数"，你更应该关心什么？\n- ❌ 区间长度？（短不一定好）\n- ❌ 开始时间？（早开始可能持续很久）\n- ✅ **结束时间**！（正确方向）`,
       stageTail[scenario],
     ].join('\n\n')
   }
 
-  const rD = runStrategy('D', demoTasks)
-  const rA = runStrategy('A', demoTasks)
+  const rD = runStrategy('D', coreTasks)
+  const rA = runStrategy('A', coreTasks)
   return [
     `## ⚠️ 结果可能接近最优，但效率不适合课堂常用方案`,
     stageIntro,
@@ -620,7 +620,7 @@ export function StudentQA() {
             </div>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-slate-50 dark:bg-white/5 px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white/75">
               <BadgeCheck className="h-4 w-4 text-emerald-200" />
-              Demo 可直接使用
+              实验环境已就绪，可直接进入
             </span>
           </div>
 

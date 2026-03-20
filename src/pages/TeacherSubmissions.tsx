@@ -287,7 +287,7 @@ export function TeacherSubmissions() {
             <FileCode className="h-7 w-7 text-cyan-300" />
             学生提交记录与排行榜
           </h1>
-          <p className="mt-1 text-slate-500 dark:text-white/60">前端静态数据演示课后加权后的综合评价与提交分析</p>
+          <p className="mt-1 text-slate-500 dark:text-white/60">AI 汇聚生成的课后加权后的综合评价与提交分析</p>
         </div>
         <div className="flex items-center gap-3">
           <button

@@ -117,7 +117,7 @@ export function runStrategy(key: StrategyKey, tasks: VulnTask[]): ScheduleResult
   return strategyD_BruteForceOptimal(tasks)
 }
 
-export const demoTasks: VulnTask[] = [
+export const coreTasks: VulnTask[] = [
   { id: 'T1', title: '修复 SQL 注入规则', system: 'WAF', severity: 4, start: 1, end: 4, note: '规则变更需灰度' },
   { id: 'T2', title: '升级 IDS 规则集', system: 'IDS', severity: 3, start: 3, end: 5 },
   { id: 'T3', title: '补丁：API 鉴权绕过', system: 'API-Gateway', severity: 5, start: 0, end: 6, note: '覆盖面大但耗时' },
