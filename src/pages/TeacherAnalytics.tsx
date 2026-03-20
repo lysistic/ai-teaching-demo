@@ -241,7 +241,7 @@ export function TeacherAnalytics() {
           />
         </div>
 
-        <div className="glass neon-border p-6">
+        <div className="glass transition-all hover:border-indigo-500/30 neon-border p-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5">
@@ -326,8 +326,8 @@ export function TeacherAnalytics() {
           </div>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="glass neon-border p-6">
+        <div className="grid gap-6 animate-in fade-in slide-in-from-bottom-5 duration-700 md:grid-cols-2">
+          <div className="glass transition-all hover:border-indigo-500/30 neon-border p-6">
             <div className="flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5">
                 <Target className="h-6 w-6 text-indigo-600 dark:text-cyan-200" />
@@ -379,7 +379,7 @@ export function TeacherAnalytics() {
             </div>
           </div>
 
-          <div className="glass neon-border p-6">
+          <div className="glass transition-all hover:border-indigo-500/30 neon-border p-6">
             <div className="flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5">
                 <Clock className="h-6 w-6 text-indigo-200" />
@@ -419,7 +419,7 @@ export function TeacherAnalytics() {
           </div>
         </div>
 
-        <div className="glass neon-border p-6">
+        <div className="glass transition-all hover:border-indigo-500/30 neon-border p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5">
@@ -516,7 +516,7 @@ export function TeacherAnalytics() {
       </div>
 
       <div className="space-y-6 lg:col-span-4">
-        <div className="glass neon-border p-6">
+        <div className="glass transition-all hover:border-indigo-500/30 neon-border p-6">
           <div className="flex items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5">
               <AlertCircle className="h-6 w-6 text-yellow-200" />
@@ -553,7 +553,7 @@ export function TeacherAnalytics() {
           </div>
         </div>
 
-        <div className="glass neon-border p-6">
+        <div className="glass transition-all hover:border-indigo-500/30 neon-border p-6">
           <div className="flex items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5">
               <BookOpen className="h-6 w-6 text-indigo-600 dark:text-cyan-200" />
@@ -603,7 +603,7 @@ export function TeacherAnalytics() {
           </div>
         </div>
 
-        <div className="glass neon-border p-6">
+        <div className="glass transition-all hover:border-indigo-500/30 neon-border p-6">
           <div className="flex items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5">
               <Award className="h-6 w-6 text-indigo-200" />
@@ -621,7 +621,7 @@ export function TeacherAnalytics() {
           </div>
         </div>
 
-        <div className="glass neon-border p-6">
+        <div className="glass transition-all hover:border-indigo-500/30 neon-border p-6">
           <div className="flex items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5">
               <Award className="h-6 w-6 text-indigo-200" />
@@ -665,7 +665,7 @@ function StatCard({
   }
 
   return (
-    <div className="glass neon-border p-5">
+    <div className="glass transition-all hover:border-indigo-500/30 neon-border p-5">
       <div className="flex items-center gap-4">
         <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5">
           <Icon className={cn('h-6 w-6', colorClasses[color])} />
