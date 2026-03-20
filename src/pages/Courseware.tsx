@@ -217,25 +217,25 @@ export function Courseware() {
       {/* 顶部标题和统计 */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white/90 flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white/90 flex items-center gap-3">
             <BookOpen className="h-8 w-8 text-cyan-300" />
             课件资源中心
           </h1>
-          <p className="text-white/60 mt-2">
+          <p className="text-slate-500 dark:text-white/60 mt-2">
             {isTeacherMode ? '上传和管理教学课件，学生可在线查看和下载' : '查看和下载老师上传的课件资源'}
           </p>
         </div>
         
         <div className="flex items-center gap-4">
           {/* 模式切换 */}
-          <div className="flex items-center gap-2 bg-white/5 rounded-lg p-1">
+          <div className="flex items-center gap-2 bg-slate-50 dark:bg-white/5 rounded-lg p-1">
             <button
               onClick={() => setIsTeacherMode(true)}
               className={cn(
                 'px-4 py-2 rounded-md text-sm font-medium transition-colors',
                 isTeacherMode 
                   ? 'bg-cyan-500/20 text-cyan-300' 
-                  : 'text-white/60 hover:text-white/90'
+                  : 'text-slate-500 dark:text-white/60 hover:text-slate-900 dark:text-white/90'
               )}
             >
               教师模式
@@ -246,7 +246,7 @@ export function Courseware() {
                 'px-4 py-2 rounded-md text-sm font-medium transition-colors',
                 !isTeacherMode 
                   ? 'bg-purple-500/20 text-purple-300' 
-                  : 'text-white/60 hover:text-white/90'
+                  : 'text-slate-500 dark:text-white/60 hover:text-slate-900 dark:text-white/90'
               )}
             >
               学生模式
@@ -274,8 +274,8 @@ export function Courseware() {
               <Folder className="h-6 w-6 text-cyan-300" />
             </div>
             <div>
-              <div className="text-sm text-white/60">课件总数</div>
-              <div className="text-2xl font-bold text-white/90">{mockCoursewares.length}</div>
+              <div className="text-sm text-slate-500 dark:text-white/60">课件总数</div>
+              <div className="text-2xl font-bold text-slate-900 dark:text-white/90">{mockCoursewares.length}</div>
             </div>
           </div>
         </div>
@@ -285,8 +285,8 @@ export function Courseware() {
               <Eye className="h-6 w-6 text-purple-300" />
             </div>
             <div>
-              <div className="text-sm text-white/60">总浏览量</div>
-              <div className="text-2xl font-bold text-white/90">
+              <div className="text-sm text-slate-500 dark:text-white/60">总浏览量</div>
+              <div className="text-2xl font-bold text-slate-900 dark:text-white/90">
                 {mockCoursewares.reduce((sum, c) => sum + c.views, 0)}
               </div>
             </div>
@@ -298,8 +298,8 @@ export function Courseware() {
               <Download className="h-6 w-6 text-green-300" />
             </div>
             <div>
-              <div className="text-sm text-white/60">总下载量</div>
-              <div className="text-2xl font-bold text-white/90">
+              <div className="text-sm text-slate-500 dark:text-white/60">总下载量</div>
+              <div className="text-2xl font-bold text-slate-900 dark:text-white/90">
                 {mockCoursewares.reduce((sum, c) => sum + c.downloads, 0)}
               </div>
             </div>
@@ -311,8 +311,8 @@ export function Courseware() {
               <User className="h-6 w-6 text-yellow-300" />
             </div>
             <div>
-              <div className="text-sm text-white/60">上传教师</div>
-              <div className="text-2xl font-bold text-white/90">
+              <div className="text-sm text-slate-500 dark:text-white/60">上传教师</div>
+              <div className="text-2xl font-bold text-slate-900 dark:text-white/90">
                 {new Set(mockCoursewares.map(c => c.uploader)).size}
               </div>
             </div>
@@ -331,7 +331,7 @@ export function Courseware() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="搜索课件标题、描述或标签..."
-                className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white/90 placeholder-white/40 focus:outline-none focus:border-cyan-500/50"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-slate-900 dark:text-white/90 placeholder-white/40 focus:outline-none focus:border-cyan-500/50"
               />
             </div>
           </div>
@@ -343,7 +343,7 @@ export function Courseware() {
               <select 
                 value={selectedType}
                 onChange={(e) => setSelectedType(e.target.value)}
-                className="bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-sm text-white/90"
+                className="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-1.5 text-sm text-slate-900 dark:text-white/90"
               >
                 {fileTypes.map(type => (
                   <option key={type} value={type}>
@@ -354,14 +354,14 @@ export function Courseware() {
             </div>
 
             {/* 视图切换 */}
-            <div className="flex items-center gap-2 bg-white/5 rounded-lg p-1">
+            <div className="flex items-center gap-2 bg-slate-50 dark:bg-white/5 rounded-lg p-1">
               <button
                 onClick={() => setViewMode('grid')}
                 className={cn(
                   'p-2 rounded-md transition-colors',
                   viewMode === 'grid' 
                     ? 'bg-cyan-500/20 text-cyan-300' 
-                    : 'text-white/60 hover:text-white/90'
+                    : 'text-slate-500 dark:text-white/60 hover:text-slate-900 dark:text-white/90'
                 )}
               >
                 <Grid className="h-4 w-4" />
@@ -372,7 +372,7 @@ export function Courseware() {
                   'p-2 rounded-md transition-colors',
                   viewMode === 'list' 
                     ? 'bg-cyan-500/20 text-cyan-300' 
-                    : 'text-white/60 hover:text-white/90'
+                    : 'text-slate-500 dark:text-white/60 hover:text-slate-900 dark:text-white/90'
                 )}
               >
                 <List className="h-4 w-4" />
@@ -398,23 +398,23 @@ export function Courseware() {
                 <div className="flex items-center gap-2">
                   <button 
                     onClick={() => toggleStar(courseware.id)}
-                    className="p-1.5 rounded-lg hover:bg-white/5"
+                    className="p-1.5 rounded-lg hover:bg-slate-50 dark:bg-white/5"
                   >
                     <Star className={cn(
                       'h-4 w-4',
                       courseware.starred ? 'fill-yellow-400 text-yellow-400' : 'text-white/40'
                     )} />
                   </button>
-                  <button className="p-1.5 rounded-lg hover:bg-white/5">
+                  <button className="p-1.5 rounded-lg hover:bg-slate-50 dark:bg-white/5">
                     <MoreVertical className="h-4 w-4 text-white/40" />
                   </button>
                 </div>
               </div>
 
-              <h3 className="font-semibold text-white/90 mb-2 line-clamp-1" title={courseware.title}>
+              <h3 className="font-semibold text-slate-900 dark:text-white/90 mb-2 line-clamp-1" title={courseware.title}>
                 {courseware.title}
               </h3>
-              <p className="text-sm text-white/60 mb-4 line-clamp-2">
+              <p className="text-sm text-slate-500 dark:text-white/60 mb-4 line-clamp-2">
                 {courseware.description}
               </p>
 
@@ -437,19 +437,19 @@ export function Courseware() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between mt-4 pt-4 border-t border-white/10">
+              <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-200 dark:border-white/10">
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-1">
                     <Eye className="h-3 w-3 text-white/40" />
-                    <span className="text-xs text-white/60">{courseware.views}</span>
+                    <span className="text-xs text-slate-500 dark:text-white/60">{courseware.views}</span>
                   </div>
                   <div className="flex items-center gap-1">
                     <Download className="h-3 w-3 text-white/40" />
-                    <span className="text-xs text-white/60">{courseware.downloads}</span>
+                    <span className="text-xs text-slate-500 dark:text-white/60">{courseware.downloads}</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <button className="btn bg-white/5 hover:bg-white/10 text-xs">
+                  <button className="btn bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:bg-white/10 text-xs">
                     <Eye className="h-3 w-3" />
                     查看
                   </button>
@@ -467,7 +467,7 @@ export function Courseware() {
         <div className="glass neon-border overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left">
-              <thead className="bg-white/5 text-white/70">
+              <thead className="bg-slate-50 dark:bg-white/5 text-slate-700 dark:text-white/70">
                 <tr>
                   <th className="rounded-l-xl px-5 py-4">课件</th>
                   <th className="px-5 py-4">类型</th>
@@ -481,17 +481,17 @@ export function Courseware() {
               </thead>
               <tbody>
                 {filteredCoursewares.map(courseware => (
-                  <tr key={courseware.id} className="border-b border-white/5 hover:bg-white/5">
+                  <tr key={courseware.id} className="border-b border-white/5 hover:bg-slate-50 dark:bg-white/5">
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-3">
                         <div className={`h-10 w-10 rounded-xl bg-gradient-to-br ${courseware.color} flex items-center justify-center`}>
                           {getFileIcon(courseware.type)}
                         </div>
                         <div>
-                          <div className="font-medium text-white/90 truncate max-w-[200px]" title={courseware.title}>
+                          <div className="font-medium text-slate-900 dark:text-white/90 truncate max-w-[200px]" title={courseware.title}>
                             {courseware.title}
                           </div>
-                          <div className="text-xs text-white/60 truncate max-w-[200px]">
+                          <div className="text-xs text-slate-500 dark:text-white/60 truncate max-w-[200px]">
                             {courseware.description}
                           </div>
                         </div>
@@ -502,40 +502,40 @@ export function Courseware() {
                         {courseware.type.toUpperCase()}
                       </span>
                     </td>
-                    <td className="px-5 py-4 text-white/90">{courseware.size}</td>
-                    <td className="px-5 py-4 text-white/90">{courseware.uploader}</td>
-                    <td className="px-5 py-4 text-white/60 text-sm">{courseware.uploadTime}</td>
+                    <td className="px-5 py-4 text-slate-900 dark:text-white/90">{courseware.size}</td>
+                    <td className="px-5 py-4 text-slate-900 dark:text-white/90">{courseware.uploader}</td>
+                    <td className="px-5 py-4 text-slate-500 dark:text-white/60 text-sm">{courseware.uploadTime}</td>
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-1">
                         <Eye className="h-3 w-3 text-white/40" />
-                        <span className="text-white/90">{courseware.views}</span>
+                        <span className="text-slate-900 dark:text-white/90">{courseware.views}</span>
                       </div>
                     </td>
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-1">
                         <Download className="h-3 w-3 text-white/40" />
-                        <span className="text-white/90">{courseware.downloads}</span>
+                        <span className="text-slate-900 dark:text-white/90">{courseware.downloads}</span>
                       </div>
                     </td>
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-2">
-                        <button className="p-1.5 rounded-lg hover:bg-white/5">
-                          <Eye className="h-4 w-4 text-white/60" />
+                        <button className="p-1.5 rounded-lg hover:bg-slate-50 dark:bg-white/5">
+                          <Eye className="h-4 w-4 text-slate-500 dark:text-white/60" />
                         </button>
-                        <button className="p-1.5 rounded-lg hover:bg-white/5">
-                          <Download className="h-4 w-4 text-white/60" />
+                        <button className="p-1.5 rounded-lg hover:bg-slate-50 dark:bg-white/5">
+                          <Download className="h-4 w-4 text-slate-500 dark:text-white/60" />
                         </button>
                         <button 
                           onClick={() => toggleStar(courseware.id)}
-                          className="p-1.5 rounded-lg hover:bg-white/5"
+                          className="p-1.5 rounded-lg hover:bg-slate-50 dark:bg-white/5"
                         >
                           <Star className={cn(
                             'h-4 w-4',
-                            courseware.starred ? 'fill-yellow-400 text-yellow-400' : 'text-white/60'
+                            courseware.starred ? 'fill-yellow-400 text-yellow-400' : 'text-slate-500 dark:text-white/60'
                           )} />
                         </button>
                         {isTeacherMode && (
-                          <button className="p-1.5 rounded-lg hover:bg-white/5">
+                          <button className="p-1.5 rounded-lg hover:bg-slate-50 dark:bg-white/5">
                             <Trash2 className="h-4 w-4 text-red-400/60" />
                           </button>
                         )}
@@ -554,13 +554,13 @@ export function Courseware() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="glass neon-border w-full max-w-md p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-white/90 flex items-center gap-2">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white/90 flex items-center gap-2">
                 <Upload className="h-6 w-6 text-cyan-300" />
                 上传课件
               </h2>
               <button
                 onClick={() => setUploadModalOpen(false)}
-                className="p-1.5 rounded-lg hover:bg-white/5"
+                className="p-1.5 rounded-lg hover:bg-slate-50 dark:bg-white/5"
               >
                 <XCircle className="h-5 w-5 text-white/40" />
               </button>
@@ -568,46 +568,46 @@ export function Courseware() {
 
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-white/90 mb-2">
+                <label className="block text-sm font-medium text-slate-900 dark:text-white/90 mb-2">
                   课件标题
                 </label>
                 <input
                   type="text"
                   placeholder="请输入课件标题"
-                  className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white/90 placeholder-white/40 focus:outline-none focus:border-cyan-500/50"
+                  className="w-full px-3 py-2 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg text-slate-900 dark:text-white/90 placeholder-white/40 focus:outline-none focus:border-cyan-500/50"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white/90 mb-2">
+                <label className="block text-sm font-medium text-slate-900 dark:text-white/90 mb-2">
                   课件描述
                 </label>
                 <textarea
                   placeholder="请输入课件描述"
                   rows={3}
-                  className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white/90 placeholder-white/40 focus:outline-none focus:border-cyan-500/50 resize-none"
+                  className="w-full px-3 py-2 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg text-slate-900 dark:text-white/90 placeholder-white/40 focus:outline-none focus:border-cyan-500/50 resize-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white/90 mb-2">
+                <label className="block text-sm font-medium text-slate-900 dark:text-white/90 mb-2">
                   选择文件
                 </label>
-                <div className="border-2 border-dashed border-white/10 rounded-xl p-8 text-center hover:border-cyan-500/30 transition-colors">
+                <div className="border-2 border-dashed border-slate-200 dark:border-white/10 rounded-xl p-8 text-center hover:border-cyan-500/30 transition-colors">
                   <Upload className="h-12 w-12 text-white/30 mx-auto mb-4" />
-                  <p className="text-white/60 mb-2">点击或拖拽文件到此处上传</p>
+                  <p className="text-slate-500 dark:text-white/60 mb-2">点击或拖拽文件到此处上传</p>
                   <p className="text-sm text-white/40">支持 PDF, PPT, DOC, 视频等格式</p>
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white/90 mb-2">
+                <label className="block text-sm font-medium text-slate-900 dark:text-white/90 mb-2">
                   标签（用逗号分隔）
                 </label>
                 <input
                   type="text"
                   placeholder="算法, 数据结构, 编程"
-                  className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white/90 placeholder-white/40 focus:outline-none focus:border-cyan-500/50"
+                  className="w-full px-3 py-2 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg text-slate-900 dark:text-white/90 placeholder-white/40 focus:outline-none focus:border-cyan-500/50"
                 />
               </div>
 
@@ -615,10 +615,10 @@ export function Courseware() {
               {uploading && (
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-white/60">上传中...</span>
-                    <span className="text-white/90">{uploadProgress}%</span>
+                    <span className="text-slate-500 dark:text-white/60">上传中...</span>
+                    <span className="text-slate-900 dark:text-white/90">{uploadProgress}%</span>
                   </div>
-                  <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+                  <div className="h-2 bg-slate-50 dark:bg-white/5 rounded-full overflow-hidden">
                     <div 
                       className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-300"
                       style={{ width: `${uploadProgress}%` }}
@@ -645,7 +645,7 @@ export function Courseware() {
                 <button
                   onClick={() => setUploadModalOpen(false)}
                   disabled={uploading}
-                  className="btn bg-white/5 hover:bg-white/10"
+                  className="btn bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:bg-white/10"
                 >
                   取消
                 </button>
@@ -659,8 +659,8 @@ export function Courseware() {
       {filteredCoursewares.length === 0 && (
         <div className="glass neon-border p-12 text-center">
           <FileText className="h-16 w-16 text-white/30 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-white/90 mb-2">暂无课件</h3>
-          <p className="text-white/60 mb-6">
+          <h3 className="text-xl font-semibold text-slate-900 dark:text-white/90 mb-2">暂无课件</h3>
+          <p className="text-slate-500 dark:text-white/60 mb-6">
             {searchQuery ? '没有找到匹配的课件，请尝试其他搜索词' : '还没有上传任何课件'}
           </p>
           {isTeacherMode && (
@@ -683,8 +683,8 @@ export function Courseware() {
               <FileText className="h-5 w-5 text-cyan-300" />
             </div>
             <div>
-              <div className="font-semibold text-white/90">多格式支持</div>
-              <div className="text-sm text-white/60">PDF, PPT, DOC, 视频等</div>
+              <div className="font-semibold text-slate-900 dark:text-white/90">多格式支持</div>
+              <div className="text-sm text-slate-500 dark:text-white/60">PDF, PPT, DOC, 视频等</div>
             </div>
           </div>
         </div>
@@ -694,8 +694,8 @@ export function Courseware() {
               <Cloud className="h-5 w-5 text-purple-300" />
             </div>
             <div>
-              <div className="font-semibold text-white/90">云端存储</div>
-              <div className="text-sm text-white/60">安全可靠，随时访问</div>
+              <div className="font-semibold text-slate-900 dark:text-white/90">云端存储</div>
+              <div className="text-sm text-slate-500 dark:text-white/60">安全可靠，随时访问</div>
             </div>
           </div>
         </div>
@@ -705,8 +705,8 @@ export function Courseware() {
               <Share2 className="h-5 w-5 text-green-300" />
             </div>
             <div>
-              <div className="font-semibold text-white/90">一键分享</div>
-              <div className="text-sm text-white/60">快速分享给班级学生</div>
+              <div className="font-semibold text-slate-900 dark:text-white/90">一键分享</div>
+              <div className="text-sm text-slate-500 dark:text-white/60">快速分享给班级学生</div>
             </div>
           </div>
         </div>

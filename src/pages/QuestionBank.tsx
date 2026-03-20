@@ -88,14 +88,14 @@ export function QuestionBank() {
       {/* 左侧：题库列表区 */}
       <div className="glass neon-border flex flex-col lg:col-span-8">
         {/* Header */}
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 px-6 py-5">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-white/10 px-6 py-5">
           <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-[0_0_15px_rgba(56,189,248,0.15)]">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 shadow-[0_0_15px_rgba(56,189,248,0.15)]">
               <Database className="h-6 w-6 text-cyan-300" />
             </div>
             <div>
-              <div className="text-lg font-bold text-white/90">题库管理</div>
-              <div className="text-sm text-white/60">管理课程算法题目，支持 AI 辅助分析与扩编</div>
+              <div className="text-lg font-bold text-slate-900 dark:text-white/90">题库管理</div>
+              <div className="text-sm text-slate-500 dark:text-white/60">管理课程算法题目，支持 AI 辅助分析与扩编</div>
             </div>
           </div>
           <button className="btn btn-primary neon-border px-4 py-2">
@@ -105,7 +105,7 @@ export function QuestionBank() {
         </div>
 
         {/* Toolbar: Search & Filters */}
-        <div className="flex flex-wrap items-center gap-4 border-b border-white/10 bg-black/20 px-6 py-4">
+        <div className="flex flex-wrap items-center gap-4 border-b border-slate-200 dark:border-white/10 bg-black/20 px-6 py-4">
           <div className="relative flex-1 min-w-[200px]">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
             <input 
@@ -113,7 +113,7 @@ export function QuestionBank() {
               placeholder="搜索题目 ID 或名称..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-xl border border-white/10 bg-white/5 py-2 pl-10 pr-4 text-sm text-white placeholder-white/40 outline-none transition-all focus:border-cyan-500/50 focus:bg-white/10"
+              className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 py-2 pl-10 pr-4 text-sm text-white placeholder-white/40 outline-none transition-all focus:border-cyan-500/50 focus:bg-slate-100 dark:bg-white/10"
             />
           </div>
           <div className="flex items-center gap-2">
@@ -121,7 +121,7 @@ export function QuestionBank() {
             <select 
               value={filterTopic} 
               onChange={(e) => setFilterTopic(e.target.value as any)}
-              className="rounded-xl border border-white/10 bg-[#1a1c23] px-3 py-2 text-sm text-white/80 outline-none focus:border-cyan-500/50"
+              className="rounded-xl border border-slate-200 dark:border-white/10 bg-[#1a1c23] px-3 py-2 text-sm text-slate-800 dark:text-white/80 outline-none focus:border-cyan-500/50"
             >
               <option value="全部">所有考点</option>
               <option value="贪心算法">贪心算法</option>
@@ -132,7 +132,7 @@ export function QuestionBank() {
             <select 
               value={filterDifficulty} 
               onChange={(e) => setFilterDifficulty(e.target.value as any)}
-              className="rounded-xl border border-white/10 bg-[#1a1c23] px-3 py-2 text-sm text-white/80 outline-none focus:border-cyan-500/50"
+              className="rounded-xl border border-slate-200 dark:border-white/10 bg-[#1a1c23] px-3 py-2 text-sm text-slate-800 dark:text-white/80 outline-none focus:border-cyan-500/50"
             >
               <option value="全部">所有难度</option>
               <option value="简单">简单</option>
@@ -145,7 +145,7 @@ export function QuestionBank() {
         {/* Table Area */}
         <div className="flex-1 overflow-x-auto">
           <table className="w-full text-left text-sm whitespace-nowrap">
-            <thead className="bg-white/5 text-white/60">
+            <thead className="bg-slate-50 dark:bg-white/5 text-slate-500 dark:text-white/60">
               <tr>
                 <th className="px-6 py-4 font-medium">题目 ID / 名称</th>
                 <th className="px-6 py-4 font-medium">考点标签</th>
@@ -157,7 +157,7 @@ export function QuestionBank() {
             <tbody className="divide-y divide-white/10">
               {filteredQuestions.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-12 text-center text-white/50">
+                  <td colSpan={5} className="px-6 py-12 text-center text-slate-500 dark:text-white/50">
                     未找到匹配的题目
                   </td>
                 </tr>
@@ -167,15 +167,15 @@ export function QuestionBank() {
                     key={q.id} 
                     onClick={() => { setActiveQuestion(q); setAiState('idle'); }}
                     className={cn(
-                      "group cursor-pointer transition-all hover:bg-white/5",
-                      activeQuestion?.id === q.id ? "bg-white/5 border-l-2 border-cyan-400" : "border-l-2 border-transparent"
+                      "group cursor-pointer transition-all hover:bg-slate-50 dark:bg-white/5",
+                      activeQuestion?.id === q.id ? "bg-slate-50 dark:bg-white/5 border-l-2 border-cyan-400" : "border-l-2 border-transparent"
                     )}
                   >
                     <td className="px-6 py-4">
-                      <div className="font-medium text-white/90 group-hover:text-cyan-300 transition-colors">
+                      <div className="font-medium text-slate-900 dark:text-white/90 group-hover:text-cyan-300 transition-colors">
                         {q.title}
                       </div>
-                      <div className="mt-1 text-xs text-white/50">{q.id}</div>
+                      <div className="mt-1 text-xs text-slate-500 dark:text-white/50">{q.id}</div>
                     </td>
                     <td className="px-6 py-4">
                       <span className={cn("inline-flex rounded-full border px-2.5 py-0.5 text-xs font-medium", getTopicColor(q.topic))}>
@@ -187,18 +187,18 @@ export function QuestionBank() {
                         {q.difficulty}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-white/70">
+                    <td className="px-6 py-4 text-slate-700 dark:text-white/70">
                       {q.usageCount} 次
                     </td>
                     <td className="px-6 py-4 text-right">
                       <div className="flex items-center justify-end gap-2 opacity-50 transition-opacity group-hover:opacity-100">
-                        <button className="rounded-lg p-2 hover:bg-white/10 text-white/70 hover:text-cyan-300 transition-colors">
+                        <button className="rounded-lg p-2 hover:bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-white/70 hover:text-cyan-300 transition-colors">
                           <Eye className="h-4 w-4" />
                         </button>
-                        <button className="rounded-lg p-2 hover:bg-white/10 text-white/70 hover:text-blue-300 transition-colors">
+                        <button className="rounded-lg p-2 hover:bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-white/70 hover:text-blue-300 transition-colors">
                           <Edit className="h-4 w-4" />
                         </button>
-                        <button className="rounded-lg p-2 hover:bg-rose-500/20 text-white/70 hover:text-rose-400 transition-colors">
+                        <button className="rounded-lg p-2 hover:bg-rose-500/20 text-slate-700 dark:text-white/70 hover:text-rose-400 transition-colors">
                           <Trash2 className="h-4 w-4" />
                         </button>
                       </div>
@@ -227,23 +227,23 @@ export function QuestionBank() {
                   <span>•</span>
                   <span>{activeQuestion.topic}</span>
                 </div>
-                <h2 className="text-xl font-bold text-white/90 leading-tight mb-4">
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white/90 leading-tight mb-4">
                   {activeQuestion.title}
                 </h2>
-                <div className="rounded-xl border border-white/10 bg-black/30 p-4 text-sm leading-relaxed text-white/70 mb-5">
+                <div className="rounded-xl border border-slate-200 dark:border-white/10 bg-black/30 p-4 text-sm leading-relaxed text-slate-700 dark:text-white/70 mb-5">
                   {activeQuestion.description}
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 text-sm">
-                  <div className="rounded-xl border border-white/10 bg-white/5 p-3 flex flex-col items-center justify-center gap-1">
-                    <span className="text-white/50 text-xs">难度评估</span>
+                  <div className="rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-3 flex flex-col items-center justify-center gap-1">
+                    <span className="text-slate-500 dark:text-white/50 text-xs">难度评估</span>
                     <span className={cn("font-medium", getDifficultyColor(activeQuestion.difficulty).split(' ')[0])}>
                       {activeQuestion.difficulty}
                     </span>
                   </div>
-                  <div className="rounded-xl border border-white/10 bg-white/5 p-3 flex flex-col items-center justify-center gap-1">
-                    <span className="text-white/50 text-xs">被引用次数</span>
-                    <span className="font-medium text-white/90">{activeQuestion.usageCount} 次</span>
+                  <div className="rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-3 flex flex-col items-center justify-center gap-1">
+                    <span className="text-slate-500 dark:text-white/50 text-xs">被引用次数</span>
+                    <span className="font-medium text-slate-900 dark:text-white/90">{activeQuestion.usageCount} 次</span>
                   </div>
                 </div>
               </div>
@@ -258,19 +258,19 @@ export function QuestionBank() {
                     <Bot className="h-4 w-4 text-purple-300" />
                   </div>
                 </div>
-                <h3 className="font-semibold text-white/90">AI 题库助手</h3>
+                <h3 className="font-semibold text-slate-900 dark:text-white/90">AI 题库助手</h3>
               </div>
 
               {/* 操作按钮 */}
               <div className="grid grid-cols-1 gap-3 mb-5">
                 <button 
                   onClick={() => handleAiAction('testcase')}
-                  className="group flex items-center justify-between rounded-xl border border-white/10 bg-white/5 p-3 hover:bg-white/10 hover:border-cyan-500/30 transition-all"
+                  className="group flex items-center justify-between rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-3 hover:bg-slate-100 dark:bg-white/10 hover:border-cyan-500/30 transition-all"
                 >
                   <div className="flex items-center gap-3">
                     <FlaskConical className="h-5 w-5 text-cyan-400" />
                     <div className="text-left">
-                      <div className="text-sm font-medium text-white/80 group-hover:text-white">生成强化测试用例</div>
+                      <div className="text-sm font-medium text-slate-800 dark:text-white/80 group-hover:text-white">生成强化测试用例</div>
                       <div className="text-xs text-white/40">基于边界条件自动生成测例</div>
                     </div>
                   </div>
@@ -279,12 +279,12 @@ export function QuestionBank() {
 
                 <button 
                   onClick={() => handleAiAction('variant')}
-                  className="group flex items-center justify-between rounded-xl border border-white/10 bg-white/5 p-3 hover:bg-white/10 hover:border-purple-500/30 transition-all"
+                  className="group flex items-center justify-between rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-3 hover:bg-slate-100 dark:bg-white/10 hover:border-purple-500/30 transition-all"
                 >
                   <div className="flex items-center gap-3">
                     <FileCode2 className="h-5 w-5 text-purple-400" />
                     <div className="text-left">
-                      <div className="text-sm font-medium text-white/80 group-hover:text-white">生成同类变体题目</div>
+                      <div className="text-sm font-medium text-slate-800 dark:text-white/80 group-hover:text-white">生成同类变体题目</div>
                       <div className="text-xs text-white/40">用于防作弊或巩固练习</div>
                     </div>
                   </div>
@@ -302,9 +302,9 @@ export function QuestionBank() {
                 ) : aiState === 'generating' ? (
                   <Thinking label={aiMode === 'testcase' ? 'AI 正在分析题目边界条件...' : 'AI 正在构思业务场景变体...'} />
                 ) : (
-                  <div className="rounded-xl border border-white/10 bg-black/40 p-1 flex flex-col h-full min-h-[200px]">
+                  <div className="rounded-xl border border-slate-200 dark:border-white/10 bg-black/40 p-1 flex flex-col h-full min-h-[200px]">
                     <div className="flex items-center justify-between px-3 py-2 border-b border-white/5">
-                      <span className="text-xs font-medium text-white/60 flex items-center gap-1.5">
+                      <span className="text-xs font-medium text-slate-500 dark:text-white/60 flex items-center gap-1.5">
                         <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
                         {aiMode === 'testcase' ? '测试用例已生成' : '变体题目已生成'}
                       </span>
@@ -316,7 +316,7 @@ export function QuestionBank() {
                       <TypewriterCode 
                         code={aiMockResult} 
                         speedMs={10} 
-                        className="!text-xs !text-white/70"
+                        className="!text-xs !text-slate-700 dark:text-white/70"
                       />
                     </div>
                   </div>
@@ -327,8 +327,8 @@ export function QuestionBank() {
         ) : (
           <div className="glass neon-border h-full flex flex-col items-center justify-center p-12 text-center">
             <Database className="h-12 w-12 text-white/10 mb-4" />
-            <h3 className="text-lg font-medium text-white/80 mb-2">未选择题目</h3>
-            <p className="text-sm text-white/50">请在左侧列表中点击任意题目查看详情并使用 AI 助手功能。</p>
+            <h3 className="text-lg font-medium text-slate-800 dark:text-white/80 mb-2">未选择题目</h3>
+            <p className="text-sm text-slate-500 dark:text-white/50">请在左侧列表中点击任意题目查看详情并使用 AI 助手功能。</p>
           </div>
         )}
       </div>

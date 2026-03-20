@@ -244,21 +244,21 @@ export function TeacherAnalytics() {
         <div className="glass neon-border p-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
-                <TrendingUp className="h-6 w-6 text-cyan-200" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5">
+                <TrendingUp className="h-6 w-6 text-indigo-600 dark:text-cyan-200" />
               </div>
               <div>
-                <div className="text-lg font-semibold text-white/90">课前课后成效对比</div>
-                <div className="text-base text-white/60">把预习诊断、课堂表现和课后复盘串成一个闭环</div>
+                <div className="text-lg font-semibold text-slate-900 dark:text-white/90">课前课后成效对比</div>
+                <div className="text-base text-slate-500 dark:text-white/60">把预习诊断、课堂表现和课后复盘串成一个闭环</div>
               </div>
             </div>
 
             <div className="flex items-center gap-3">
-              <span className="text-base text-white/60">班级：</span>
+              <span className="text-base text-slate-500 dark:text-white/60">班级：</span>
               <select
                 value={selectedClass}
                 onChange={(e) => setSelectedClass(e.target.value as 'all' | '1班' | '2班')}
-                className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-base text-white/80 focus:outline-none focus:ring-1 focus:ring-cyan-200/50"
+                className="rounded-lg border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 px-4 py-2 text-base text-slate-800 dark:text-white/80 focus:outline-none focus:ring-1 focus:ring-cyan-200/50"
               >
                 <option value="all">全部班级</option>
                 <option value="1班">1 班</option>
@@ -268,9 +268,9 @@ export function TeacherAnalytics() {
           </div>
 
           <div className="mt-5 grid gap-5 md:grid-cols-2">
-            <div className="h-[300px] rounded-2xl border border-white/10 bg-black/20 p-3">
+            <div className="h-[300px] rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 p-3">
               <div className="mb-3 flex items-center justify-between px-2">
-                <div className="text-base font-semibold text-white/80">课前诊断 vs 课后掌握</div>
+                <div className="text-base font-semibold text-slate-800 dark:text-white/80">课前诊断 vs 课后掌握</div>
                 <div className="text-sm text-white/55">课后结果已纳入 50% 权重</div>
               </div>
               <ResponsiveContainer width="100%" height="100%">
@@ -294,9 +294,9 @@ export function TeacherAnalytics() {
               </ResponsiveContainer>
             </div>
 
-            <div className="h-[300px] rounded-2xl border border-white/10 bg-black/20 p-3">
+            <div className="h-[300px] rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/20 p-3">
               <div className="mb-3 flex items-center justify-between px-2">
-                <div className="text-base font-semibold text-white/80">互动完成情况</div>
+                <div className="text-base font-semibold text-slate-800 dark:text-white/80">互动完成情况</div>
                 <div className="text-sm text-white/55">纯前端静态数据演示</div>
               </div>
               <ResponsiveContainer width="100%" height="100%">
@@ -329,12 +329,12 @@ export function TeacherAnalytics() {
         <div className="grid gap-6 md:grid-cols-2">
           <div className="glass neon-border p-6">
             <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
-                <Target className="h-6 w-6 text-cyan-200" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5">
+                <Target className="h-6 w-6 text-indigo-600 dark:text-cyan-200" />
               </div>
               <div>
-                <div className="text-lg font-semibold text-white/90">选项分布</div>
-                <div className="text-base text-white/60">课堂作答的策略选择占比</div>
+                <div className="text-lg font-semibold text-slate-900 dark:text-white/90">选项分布</div>
+                <div className="text-base text-slate-500 dark:text-white/60">课堂作答的策略选择占比</div>
               </div>
             </div>
 
@@ -373,7 +373,7 @@ export function TeacherAnalytics() {
               {choiceDistribution.map((item) => (
                 <div key={item.name} className="flex items-center gap-2">
                   <div className={cn('h-4 w-4 rounded-full', item.correct ? 'bg-green-400' : 'bg-white/40')} />
-                  <span className="text-white/70">{item.name}</span>
+                  <span className="text-slate-700 dark:text-white/70">{item.name}</span>
                 </div>
               ))}
             </div>
@@ -381,12 +381,12 @@ export function TeacherAnalytics() {
 
           <div className="glass neon-border p-6">
             <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5">
                 <Clock className="h-6 w-6 text-indigo-200" />
               </div>
               <div>
-                <div className="text-lg font-semibold text-white/90">答题时长分布</div>
-                <div className="text-base text-white/60">学生课堂作答时间区间统计</div>
+                <div className="text-lg font-semibold text-slate-900 dark:text-white/90">答题时长分布</div>
+                <div className="text-base text-slate-500 dark:text-white/60">学生课堂作答时间区间统计</div>
               </div>
             </div>
 
@@ -422,19 +422,19 @@ export function TeacherAnalytics() {
         <div className="glass neon-border p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5">
                 <Users className="h-6 w-6 text-fuchsia-200" />
               </div>
               <div>
-                <div className="text-lg font-semibold text-white/90">学生答题详情</div>
-                <div className="text-base text-white/60">增加课前/课后数据后的完整学情视图</div>
+                <div className="text-lg font-semibold text-slate-900 dark:text-white/90">学生答题详情</div>
+                <div className="text-base text-slate-500 dark:text-white/60">增加课前/课后数据后的完整学情视图</div>
               </div>
             </div>
           </div>
 
           <div className="mt-5 overflow-x-auto">
             <table className="w-full text-left text-base">
-              <thead className="bg-white/5 text-base text-white/70">
+              <thead className="bg-slate-100 dark:bg-white/5 text-base text-slate-700 dark:text-white/70">
                 <tr>
                   <th className="rounded-l-xl px-5 py-4">学生</th>
                   <th className="px-5 py-4">选择</th>
@@ -447,18 +447,18 @@ export function TeacherAnalytics() {
               </thead>
               <tbody>
                 {enrichedStudents.map((student) => (
-                  <tr key={student.id} className="border-t border-white/10">
+                  <tr key={student.id} className="border-t border-slate-200 dark:border-white/10">
                     <td className="px-5 py-4 text-lg font-medium text-white/85">
                       <div>
                         <div>{student.name}</div>
-                        <div className="mt-1 text-xs text-white/50">{student.className}</div>
+                        <div className="mt-1 text-xs text-slate-500 dark:text-white/50">{student.className}</div>
                       </div>
                     </td>
                     <td className="px-5 py-4">
                       <span
                         className={cn(
                           'inline-flex items-center justify-center rounded-lg px-3 py-2 text-base font-semibold',
-                          student.choice === 'A' ? 'bg-green-400/20 text-green-300' : 'bg-white/10 text-white/70'
+                          student.choice === 'A' ? 'bg-green-400/20 text-emerald-600 dark:text-green-300' : 'bg-slate-200 dark:bg-white/10 text-slate-700 dark:text-white/70'
                         )}
                       >
                         {student.choice}
@@ -466,7 +466,7 @@ export function TeacherAnalytics() {
                     </td>
                     <td className="px-5 py-4">
                       {student.correct ? (
-                        <span className="inline-flex items-center gap-2 text-lg text-green-300">
+                        <span className="inline-flex items-center gap-2 text-lg text-emerald-600 dark:text-green-300">
                           <CheckCircle2 className="h-5 w-5" />
                           正确
                         </span>
@@ -479,20 +479,20 @@ export function TeacherAnalytics() {
                     </td>
                     <td className="px-5 py-4 text-white/75">
                       <div>{student.preScore} 分</div>
-                      <div className="mt-1 text-xs text-white/50">
+                      <div className="mt-1 text-xs text-slate-500 dark:text-white/50">
                         {student.preCompleted ? '已预习' : '待补预习'}
                       </div>
                     </td>
                     <td className="px-5 py-4 text-white/75">
                       <div>{student.postWeightedScore} 分</div>
-                      <div className="mt-1 text-xs text-white/50">
+                      <div className="mt-1 text-xs text-slate-500 dark:text-white/50">
                         {student.postCompleted ? '已复盘' : '待补复盘'}
                       </div>
                     </td>
                     <td className="px-5 py-4 text-white/75">+{student.growth}</td>
                     <td className="px-5 py-4">
                       {student.correct && student.growth >= 15 && student.postCompleted ? (
-                        <span className="inline-flex items-center gap-2 rounded-full border border-green-400/30 bg-green-400/10 px-3 py-1 text-base font-semibold text-green-300">
+                        <span className="inline-flex items-center gap-2 rounded-full border border-green-400/30 bg-green-400/10 px-3 py-1 text-base font-semibold text-emerald-600 dark:text-green-300">
                           <TrendingUp className="h-4 w-4" />
                           提升明显
                         </span>
@@ -502,7 +502,7 @@ export function TeacherAnalytics() {
                           需课后跟进
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-base font-semibold text-white/60">
+                        <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 px-3 py-1 text-base font-semibold text-slate-500 dark:text-white/60">
                           课堂达标
                         </span>
                       )}
@@ -518,12 +518,12 @@ export function TeacherAnalytics() {
       <div className="space-y-6 lg:col-span-4">
         <div className="glass neon-border p-6">
           <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5">
               <AlertCircle className="h-6 w-6 text-yellow-200" />
             </div>
             <div>
-              <div className="text-lg font-semibold text-white/90">需要关注</div>
-              <div className="text-base text-white/60">课堂卡点或课后未闭环的学生</div>
+              <div className="text-lg font-semibold text-slate-900 dark:text-white/90">需要关注</div>
+              <div className="text-base text-slate-500 dark:text-white/60">课堂卡点或课后未闭环的学生</div>
             </div>
           </div>
 
@@ -531,13 +531,13 @@ export function TeacherAnalytics() {
             {needsAttention.map((student) => (
               <div
                 key={student.id}
-                className="rounded-2xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10"
+                className="rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 p-4 transition hover:bg-slate-200 dark:bg-white/10"
               >
                 <div className="flex items-center justify-between">
                   <div className="text-lg font-medium text-white/85">{student.name}</div>
-                  <div className="text-sm text-white/50">{student.className}</div>
+                  <div className="text-sm text-slate-500 dark:text-white/50">{student.className}</div>
                 </div>
-                <div className="mt-3 grid grid-cols-2 gap-3 text-base text-white/60">
+                <div className="mt-3 grid grid-cols-2 gap-3 text-base text-slate-500 dark:text-white/60">
                   <span>选择：{student.choice}</span>
                   <span>尝试：{student.attempts} 次</span>
                   <span>课前：{student.preScore} 分</span>
@@ -555,19 +555,19 @@ export function TeacherAnalytics() {
 
         <div className="glass neon-border p-6">
           <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
-              <BookOpen className="h-6 w-6 text-cyan-200" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5">
+              <BookOpen className="h-6 w-6 text-indigo-600 dark:text-cyan-200" />
             </div>
             <div>
-              <div className="text-lg font-semibold text-white/90">教学建议</div>
-              <div className="text-base text-white/60">AI 生成的阶段化建议</div>
+              <div className="text-lg font-semibold text-slate-900 dark:text-white/90">教学建议</div>
+              <div className="text-base text-slate-500 dark:text-white/60">AI 生成的阶段化建议</div>
             </div>
           </div>
 
           <div className="mt-5 space-y-4">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 p-4">
               <div className="flex items-start gap-3">
-                <ChevronUp className="mt-1 h-5 w-5 shrink-0 text-green-300" />
+                <ChevronUp className="mt-1 h-5 w-5 shrink-0 text-emerald-600 dark:text-green-300" />
                 <div>
                   <div className="text-lg font-medium text-white/85">课后权重已体现提升</div>
                   <div className="mt-2 text-base text-white/65">
@@ -577,7 +577,7 @@ export function TeacherAnalytics() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 p-4">
               <div className="flex items-start gap-3">
                 <ChevronDown className="mt-1 h-5 w-5 shrink-0 text-yellow-300" />
                 <div>
@@ -589,7 +589,7 @@ export function TeacherAnalytics() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 p-4">
               <div className="flex items-start gap-3">
                 <Target className="mt-1 h-5 w-5 shrink-0 text-cyan-300" />
                 <div>
@@ -605,12 +605,12 @@ export function TeacherAnalytics() {
 
         <div className="glass neon-border p-6">
           <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5">
               <Award className="h-6 w-6 text-indigo-200" />
             </div>
             <div>
-              <div className="text-lg font-semibold text-white/90">综合评价权重</div>
-              <div className="text-base text-white/60">课后的比重已提高到 50%</div>
+              <div className="text-lg font-semibold text-slate-900 dark:text-white/90">综合评价权重</div>
+              <div className="text-base text-slate-500 dark:text-white/60">课后的比重已提高到 50%</div>
             </div>
           </div>
 
@@ -623,12 +623,12 @@ export function TeacherAnalytics() {
 
         <div className="glass neon-border p-6">
           <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5">
               <Award className="h-6 w-6 text-indigo-200" />
             </div>
             <div>
-              <div className="text-lg font-semibold text-white/90">知识点掌握</div>
-              <div className="text-base text-white/60">已纳入课后复盘结果</div>
+              <div className="text-lg font-semibold text-slate-900 dark:text-white/90">知识点掌握</div>
+              <div className="text-base text-slate-500 dark:text-white/60">已纳入课后复盘结果</div>
             </div>
           </div>
 
@@ -657,7 +657,7 @@ function StatCard({
   color: 'cyan' | 'green' | 'indigo' | 'fuchsia' | 'yellow'
 }) {
   const colorClasses = {
-    cyan: 'text-cyan-200',
+    cyan: 'text-indigo-600 dark:text-cyan-200',
     green: 'text-green-200',
     indigo: 'text-indigo-200',
     fuchsia: 'text-fuchsia-200',
@@ -667,15 +667,15 @@ function StatCard({
   return (
     <div className="glass neon-border p-5">
       <div className="flex items-center gap-4">
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5">
           <Icon className={cn('h-6 w-6', colorClasses[color])} />
         </div>
         <div>
-          <div className="text-base text-white/60">{label}</div>
-          <div className="text-2xl font-bold text-white/90">{value}</div>
+          <div className="text-base text-slate-500 dark:text-white/60">{label}</div>
+          <div className="text-2xl font-bold text-slate-900 dark:text-white/90">{value}</div>
         </div>
       </div>
-      <div className="mt-3 text-base text-white/50">{sub}</div>
+      <div className="mt-3 text-base text-slate-500 dark:text-white/50">{sub}</div>
     </div>
   )
 }
@@ -684,10 +684,10 @@ function WeightRow({ label, value, tone }: { label: string; value: number; tone:
   return (
     <div>
       <div className="flex items-center justify-between text-base">
-        <span className="text-white/70">{label}</span>
+        <span className="text-slate-700 dark:text-white/70">{label}</span>
         <span className="text-lg font-medium text-white/85">{Math.round(value * 100)}%</span>
       </div>
-      <div className="mt-2 h-3 rounded-full bg-white/10">
+      <div className="mt-2 h-3 rounded-full bg-slate-200 dark:bg-white/10">
         <div className={cn('h-3 rounded-full bg-gradient-to-r transition-all', tone)} style={{ width: `${value * 100}%` }} />
       </div>
     </div>
@@ -698,10 +698,10 @@ function KnowledgeBar({ label, value }: { label: string; value: number }) {
   return (
     <div>
       <div className="flex items-center justify-between text-base">
-        <span className="text-white/70">{label}</span>
+        <span className="text-slate-700 dark:text-white/70">{label}</span>
         <span className="text-lg font-medium text-white/85">{value}%</span>
       </div>
-      <div className="mt-2 h-3 rounded-full bg-white/10">
+      <div className="mt-2 h-3 rounded-full bg-slate-200 dark:bg-white/10">
         <div
           className="h-3 rounded-full bg-gradient-to-r from-cyan-300/60 via-indigo-300/60 to-fuchsia-300/60 transition-all"
           style={{ width: `${value}%` }}

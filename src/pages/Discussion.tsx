@@ -400,7 +400,7 @@ export function Discussion() {
       case '教师': return 'text-cyan-300'
       case 'AI助教': return 'text-purple-300'
       case '学生': return 'text-green-300'
-      default: return 'text-white/60'
+      default: return 'text-slate-500 dark:text-white/60'
     }
   }
 
@@ -410,7 +410,7 @@ export function Discussion() {
       case '教师': return 'bg-cyan-500/10 border-cyan-500/30'
       case 'AI助教': return 'bg-purple-500/10 border-purple-500/30'
       case '学生': return 'bg-green-500/10 border-green-500/30'
-      default: return 'bg-white/5 border-white/10'
+      default: return 'bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/10'
     }
   }
 
@@ -419,11 +419,11 @@ export function Discussion() {
       {/* 顶部标题和统计 */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white/90 flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white/90 flex items-center gap-3">
             <MessageSquare className="h-8 w-8 text-cyan-300" />
             算法讨论区
           </h1>
-          <p className="text-white/60 mt-2">
+          <p className="text-slate-500 dark:text-white/60 mt-2">
             与同学、老师、AI助教一起讨论算法问题，共同进步
           </p>
         </div>
@@ -435,7 +435,7 @@ export function Discussion() {
               'flex items-center gap-2 px-3 py-1.5 rounded-lg border',
               aiAssistantActive 
                 ? 'bg-purple-500/10 border-purple-500/30 text-purple-300' 
-                : 'bg-white/5 border-white/10 text-white/60'
+                : 'bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-500 dark:text-white/60'
             )}>
               <Bot className="h-4 w-4" />
               <span className="text-sm font-medium">AI助教</span>
@@ -444,7 +444,7 @@ export function Discussion() {
               onClick={() => setAiAssistantActive(!aiAssistantActive)}
               className={cn(
                 'relative inline-flex h-6 w-11 items-center rounded-full transition-colors',
-                aiAssistantActive ? 'bg-purple-500' : 'bg-white/10'
+                aiAssistantActive ? 'bg-purple-500' : 'bg-slate-100 dark:bg-white/10'
               )}
             >
               <span className={cn(
@@ -457,20 +457,20 @@ export function Discussion() {
           {/* 统计信息 */}
           <div className="hidden md:flex items-center gap-6">
             <div className="text-center">
-              <div className="text-2xl font-bold text-white/90">{posts.length}</div>
-              <div className="text-xs text-white/60">讨论帖子</div>
+              <div className="text-2xl font-bold text-slate-900 dark:text-white/90">{posts.length}</div>
+              <div className="text-xs text-slate-500 dark:text-white/60">讨论帖子</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-white/90">
+              <div className="text-2xl font-bold text-slate-900 dark:text-white/90">
                 {posts.reduce((sum, post) => sum + post.replies, 0)}
               </div>
-              <div className="text-xs text-white/60">总回复</div>
+              <div className="text-xs text-slate-500 dark:text-white/60">总回复</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-white/90">
+              <div className="text-2xl font-bold text-slate-900 dark:text-white/90">
                 {posts.filter(p => p.isHot).length}
               </div>
-              <div className="text-xs text-white/60">热门话题</div>
+              <div className="text-xs text-slate-500 dark:text-white/60">热门话题</div>
             </div>
           </div>
         </div>
@@ -488,7 +488,7 @@ export function Discussion() {
         <div className="lg:col-span-1 space-y-6">
           {/* 发布新帖子 */}
           <div className="glass neon-border p-5">
-            <h2 className="text-lg font-semibold text-white/90 mb-4">💬 发布新讨论</h2>
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-white/90 mb-4">💬 发布新讨论</h2>
             <div className="space-y-4">
               <div>
                 <textarea
@@ -496,14 +496,14 @@ export function Discussion() {
                   value={newPost}
                   onChange={(e) => setNewPost(e.target.value)}
                   placeholder="分享你的算法问题、学习心得或想法..."
-                  className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-xl text-white/90 placeholder-white/40 focus:outline-none focus:border-cyan-500/50 resize-none min-h-[100px]"
+                  className="w-full px-3 py-2 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-slate-900 dark:text-white/90 placeholder-white/40 focus:outline-none focus:border-cyan-500/50 resize-none min-h-[100px]"
                   rows={3}
                 />
               </div>
               
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-white/60">添加标签：</span>
+                  <span className="text-sm text-slate-500 dark:text-white/60">添加标签：</span>
                   {['算法', '作业', '求助', '分享'].map(tag => (
                     <button
                       key={tag}
@@ -519,7 +519,7 @@ export function Discussion() {
                   disabled={!newPost.trim()}
                   className={cn(
                     'btn flex items-center gap-2',
-                    newPost.trim() ? 'btn-primary neon-border' : 'bg-white/5 text-white/40'
+                    newPost.trim() ? 'btn-primary neon-border' : 'bg-slate-50 dark:bg-white/5 text-white/40'
                   )}
                 >
                   <Send className="h-4 w-4" />
@@ -531,7 +531,7 @@ export function Discussion() {
 
           {/* 热门话题 */}
           <div className="glass neon-border p-5">
-            <h2 className="text-lg font-semibold text-white/90 mb-4 flex items-center gap-2">
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-white/90 mb-4 flex items-center gap-2">
               <TrendingUp className="h-5 w-5 text-orange-300" />
               热门话题
             </h2>
@@ -544,15 +544,15 @@ export function Discussion() {
                     'w-full flex items-center justify-between p-3 rounded-lg transition-colors',
                     filterTag === topic.name 
                       ? 'bg-cyan-500/10 border border-cyan-500/30' 
-                      : 'bg-white/5 hover:bg-white/10 border border-transparent'
+                      : 'bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:bg-white/10 border border-transparent'
                   )}
                 >
                   <div className="flex items-center gap-3">
                     <Hash className="h-4 w-4 text-white/40" />
-                    <span className="font-medium text-white/90">{topic.name}</span>
+                    <span className="font-medium text-slate-900 dark:text-white/90">{topic.name}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-sm text-white/60">{topic.count}</span>
+                    <span className="text-sm text-slate-500 dark:text-white/60">{topic.count}</span>
                     {topic.trend === 'up' && <TrendingUp className="h-3 w-3 text-green-400" />}
                     {topic.trend === 'down' && <TrendingUp className="h-3 w-3 text-red-400 rotate-180" />}
                   </div>
@@ -563,25 +563,25 @@ export function Discussion() {
 
           {/* 活跃用户 */}
           <div className="glass neon-border p-5">
-            <h2 className="text-lg font-semibold text-white/90 mb-4 flex items-center gap-2">
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-white/90 mb-4 flex items-center gap-2">
               <Users className="h-5 w-5 text-green-300" />
               活跃用户
             </h2>
             <div className="space-y-3">
               {activeUsers.map(user => (
-                <div key={user.id} className="flex items-center justify-between p-3 rounded-lg bg-white/5">
+                <div key={user.id} className="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-white/5">
                   <div className="flex items-center gap-3">
                     <div className="relative">
                       <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center">
-                        <span className="font-semibold text-white/90">{user.avatar}</span>
+                        <span className="font-semibold text-slate-900 dark:text-white/90">{user.avatar}</span>
                       </div>
                       {user.isOnline && (
                         <div className="absolute -bottom-1 -right-1 h-3 w-3 rounded-full bg-green-400 border-2 border-black/20" />
                       )}
                     </div>
                     <div>
-                      <div className="font-medium text-white/90">{user.name}</div>
-                      <div className="text-xs text-white/60">
+                      <div className="font-medium text-slate-900 dark:text-white/90">{user.name}</div>
+                      <div className="text-xs text-slate-500 dark:text-white/60">
                         {user.posts}帖 · {user.replies}回复
                       </div>
                     </div>
@@ -597,7 +597,7 @@ export function Discussion() {
           {/* AI助教功能 */}
           <div className="glass neon-border p-5">
             <div className="mb-4 flex items-center justify-between gap-2">
-              <h2 className="text-lg font-semibold text-white/90 flex items-center gap-2">
+              <h2 className="text-lg font-semibold text-slate-900 dark:text-white/90 flex items-center gap-2">
                 <Brain className="h-5 w-5 text-purple-300" />
                 AI助教功能
               </h2>
@@ -605,7 +605,7 @@ export function Discussion() {
                 onClick={() => setRolePanelOpen((prev) => !prev)}
                 className={cn(
                   'btn px-3 py-1.5 text-xs',
-                  rolePanelOpen ? 'bg-purple-500/20 border-purple-500/35' : 'bg-white/5 hover:bg-white/10'
+                  rolePanelOpen ? 'bg-purple-500/20 border-purple-500/35' : 'bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:bg-white/10'
                 )}
               >
                 角色设定
@@ -613,8 +613,8 @@ export function Discussion() {
             </div>
 
             <div className="mb-4 rounded-xl border border-purple-500/30 bg-purple-500/10 px-3 py-2">
-              <div className="text-xs text-white/60">当前角色</div>
-              <div className="mt-0.5 text-sm font-semibold text-white/90">{selectedAiRole.label}</div>
+              <div className="text-xs text-slate-500 dark:text-white/60">当前角色</div>
+              <div className="mt-0.5 text-sm font-semibold text-slate-900 dark:text-white/90">{selectedAiRole.label}</div>
               <div className="text-xs text-white/65">{selectedAiRole.summary}</div>
             </div>
 
@@ -631,27 +631,27 @@ export function Discussion() {
                       'w-full rounded-lg border px-3 py-2 text-left transition',
                       selectedAiRoleId === role.id
                         ? 'border-cyan-500/40 bg-cyan-500/15'
-                        : 'border-white/10 bg-white/5 hover:bg-white/10'
+                        : 'border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:bg-white/10'
                     )}
                   >
-                    <div className="text-sm font-semibold text-white/90">{role.label}</div>
-                    <div className="mt-0.5 text-xs text-white/60">{role.summary}</div>
+                    <div className="text-sm font-semibold text-slate-900 dark:text-white/90">{role.label}</div>
+                    <div className="mt-0.5 text-xs text-slate-500 dark:text-white/60">{role.summary}</div>
                   </button>
                 ))}
               </div>
             )}
 
             <div className="space-y-3">
-              <div className="rounded-xl border border-white/10 bg-black/20 p-3">
+              <div className="rounded-xl border border-slate-200 dark:border-white/10 bg-black/20 p-3">
                 <div className="mb-3 flex items-center justify-between gap-2">
-                  <div className="text-sm font-semibold text-white/90">Algo智能体对话框</div>
+                  <div className="text-sm font-semibold text-slate-900 dark:text-white/90">Algo智能体对话框</div>
                   <button
                     onClick={() => setEnableWebSearch((prev) => !prev)}
                     className={cn(
                       'btn px-2.5 py-1 text-xs',
                       enableWebSearch
                         ? 'bg-cyan-500/20 border-cyan-500/35 text-cyan-200'
-                        : 'bg-white/5 border-white/10'
+                        : 'bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/10'
                     )}
                   >
                     <Globe className="h-3.5 w-3.5" />
@@ -659,7 +659,7 @@ export function Discussion() {
                   </button>
                 </div>
 
-                <div className="max-h-52 space-y-2 overflow-auto rounded-lg border border-white/10 bg-white/5 p-2">
+                <div className="max-h-52 space-y-2 overflow-auto rounded-lg border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-2">
                   {assistantChat.map((msg) => (
                     <div
                       key={msg.ts}
@@ -667,14 +667,14 @@ export function Discussion() {
                         'rounded-lg px-3 py-2 text-xs leading-relaxed',
                         msg.role === 'assistant'
                           ? 'border border-cyan-500/20 bg-cyan-500/10 text-white/85'
-                          : 'border border-white/10 bg-black/25 text-white/90'
+                          : 'border border-slate-200 dark:border-white/10 bg-black/25 text-slate-900 dark:text-white/90'
                       )}
                     >
                       {msg.imageDataUrl && (
                         <img
                           src={msg.imageDataUrl}
                           alt="upload"
-                          className="mb-2 max-h-28 rounded-md border border-white/10"
+                          className="mb-2 max-h-28 rounded-md border border-slate-200 dark:border-white/10"
                         />
                       )}
                       <div className="whitespace-pre-wrap">{msg.text}</div>
@@ -683,12 +683,12 @@ export function Discussion() {
                 </div>
 
                 {chatImage && (
-                  <div className="mt-2 rounded-lg border border-white/10 bg-white/5 p-2">
+                  <div className="mt-2 rounded-lg border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-2">
                     <div className="mb-1 flex items-center justify-between text-xs text-white/65">
                       <span>{chatImage.name}</span>
                       <button
                         onClick={() => setChatImage(null)}
-                        className="rounded p-0.5 hover:bg-white/10"
+                        className="rounded p-0.5 hover:bg-slate-100 dark:bg-white/10"
                       >
                         <X className="h-3.5 w-3.5" />
                       </button>
@@ -701,7 +701,7 @@ export function Discussion() {
                   value={chatInput}
                   onChange={(event) => setChatInput(event.target.value)}
                   placeholder="输入问题，支持文本 + 图片..."
-                  className="mt-2 min-h-[72px] w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/90 placeholder-white/45 focus:outline-none focus:border-cyan-500/40"
+                  className="mt-2 min-h-[72px] w-full rounded-lg border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 px-3 py-2 text-sm text-slate-900 dark:text-white/90 placeholder-white/45 focus:outline-none focus:border-cyan-500/40"
                 />
 
                 <input
@@ -745,25 +745,25 @@ export function Discussion() {
                 </div>
               </div>
 
-              <button className="w-full flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
+              <button className="w-full flex items-center gap-3 p-3 rounded-lg bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:bg-white/10 transition-colors">
                 <Lightbulb className="h-5 w-5 text-yellow-400" />
                 <div className="text-left">
-                  <div className="font-medium text-white/90">智能答疑</div>
-                  <div className="text-xs text-white/60">支持文本+图片多模态提问</div>
+                  <div className="font-medium text-slate-900 dark:text-white/90">智能答疑</div>
+                  <div className="text-xs text-slate-500 dark:text-white/60">支持文本+图片多模态提问</div>
                 </div>
               </button>
-              <button className="w-full flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
+              <button className="w-full flex items-center gap-3 p-3 rounded-lg bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:bg-white/10 transition-colors">
                 <Zap className="h-5 w-5 text-cyan-400" />
                 <div className="text-left">
-                  <div className="font-medium text-white/90">联网检索</div>
-                  <div className="text-xs text-white/60">可切换 Web Search 能力</div>
+                  <div className="font-medium text-slate-900 dark:text-white/90">联网检索</div>
+                  <div className="text-xs text-slate-500 dark:text-white/60">可切换 Web Search 能力</div>
                 </div>
               </button>
-              <button className="w-full flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
+              <button className="w-full flex items-center gap-3 p-3 rounded-lg bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:bg-white/10 transition-colors">
                 <Volume2 className="h-5 w-5 text-green-400" />
                 <div className="text-left">
-                  <div className="font-medium text-white/90">角色协同</div>
-                  <div className="text-xs text-white/60">结合角色设定输出差异化回答</div>
+                  <div className="font-medium text-slate-900 dark:text-white/90">角色协同</div>
+                  <div className="text-xs text-slate-500 dark:text-white/60">结合角色设定输出差异化回答</div>
                 </div>
               </button>
             </div>
@@ -783,7 +783,7 @@ export function Discussion() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="搜索讨论内容、用户或标签..."
-                    className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white/90 placeholder-white/40 focus:outline-none focus:border-cyan-500/50"
+                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-slate-900 dark:text-white/90 placeholder-white/40 focus:outline-none focus:border-cyan-500/50"
                   />
                 </div>
               </div>
@@ -794,7 +794,7 @@ export function Discussion() {
                   <select 
                     value={filterTag || 'all'}
                     onChange={(e) => setFilterTag(e.target.value === 'all' ? null : e.target.value)}
-                    className="bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-sm text-white/90"
+                    className="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-1.5 text-sm text-slate-900 dark:text-white/90"
                   >
                     <option value="all">全部话题</option>
                     {Array.from(new Set(posts.flatMap(p => p.tags))).map(tag => (
@@ -808,7 +808,7 @@ export function Discussion() {
                     setFilterTag(null)
                     setSearchQuery('')
                   }}
-                  className="btn bg-white/5 hover:bg-white/10"
+                  className="btn bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:bg-white/10"
                 >
                   <RefreshCw className="h-4 w-4" />
                   重置
@@ -829,7 +829,7 @@ export function Discussion() {
                         'h-12 w-12 rounded-xl flex items-center justify-center',
                         getRoleBgColor(post.role)
                       )}>
-                        <span className="font-bold text-white/90">{post.avatar}</span>
+                        <span className="font-bold text-slate-900 dark:text-white/90">{post.avatar}</span>
                       </div>
                       {post.isHot && (
                         <div className="absolute -top-2 -right-2">
@@ -841,12 +841,12 @@ export function Discussion() {
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-semibold text-white/90">{post.author}</span>
+                        <span className="font-semibold text-slate-900 dark:text-white/90">{post.author}</span>
                         <span className={cn('chip text-xs', getRoleColor(post.role))}>
                           {post.role}
                         </span>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-white/60">
+                      <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-white/60">
                         <Clock className="h-3 w-3" />
                         {post.time}
                       </div>
@@ -856,32 +856,32 @@ export function Discussion() {
                   <div className="flex items-center gap-2">
                     <button 
                       onClick={() => handleLike(post.id)}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/5"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-slate-50 dark:bg-white/5"
                     >
                       <ThumbsUp className={cn(
                         'h-4 w-4',
-                        post.isLiked ? 'fill-cyan-400 text-cyan-400' : 'text-white/60'
+                        post.isLiked ? 'fill-cyan-400 text-cyan-400' : 'text-slate-500 dark:text-white/60'
                       )} />
-                      <span className="text-sm text-white/90">{post.likes}</span>
+                      <span className="text-sm text-slate-900 dark:text-white/90">{post.likes}</span>
                     </button>
                     <button 
                       onClick={() => handleBookmark(post.id)}
-                      className="p-1.5 rounded-lg hover:bg-white/5"
+                      className="p-1.5 rounded-lg hover:bg-slate-50 dark:bg-white/5"
                     >
                       <Bookmark className={cn(
                         'h-4 w-4',
-                        post.isBookmarked ? 'fill-yellow-400 text-yellow-400' : 'text-white/60'
+                        post.isBookmarked ? 'fill-yellow-400 text-yellow-400' : 'text-slate-500 dark:text-white/60'
                       )} />
                     </button>
-                    <button className="p-1.5 rounded-lg hover:bg-white/5">
-                      <MoreVertical className="h-4 w-4 text-white/60" />
+                    <button className="p-1.5 rounded-lg hover:bg-slate-50 dark:bg-white/5">
+                      <MoreVertical className="h-4 w-4 text-slate-500 dark:text-white/60" />
                     </button>
                   </div>
                 </div>
 
                 {/* 帖子内容 */}
                 <div className="mb-4">
-                  <p className="text-white/90 mb-3 whitespace-pre-line">{post.content}</p>
+                  <p className="text-slate-900 dark:text-white/90 mb-3 whitespace-pre-line">{post.content}</p>
                   
                   <div className="flex flex-wrap gap-2 mb-4">
                     {post.tags.map(tag => (
@@ -901,7 +901,7 @@ export function Discussion() {
                   <div className="mb-4 p-4 rounded-xl border border-purple-500/30 bg-purple-500/5">
                     <div className="flex items-center gap-2 mb-3">
                       <Bot className="h-5 w-5 text-purple-300" />
-                      <span className="font-semibold text-white/90">AI助教分析</span>
+                      <span className="font-semibold text-slate-900 dark:text-white/90">AI助教分析</span>
                     </div>
                     <div className="prose prose-invert max-w-none text-sm">
                       <div className="whitespace-pre-line text-white/75">
@@ -912,13 +912,13 @@ export function Discussion() {
                 )}
 
                 {/* 操作按钮 */}
-                <div className="flex items-center justify-between pt-4 border-t border-white/10">
+                <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-white/10">
                   <div className="flex items-center gap-4">
-                    <button className="flex items-center gap-1.5 text-sm text-white/60 hover:text-white/90">
+                    <button className="flex items-center gap-1.5 text-sm text-slate-500 dark:text-white/60 hover:text-slate-900 dark:text-white/90">
                       <MessageSquare className="h-4 w-4" />
                       {post.replies} 条回复
                     </button>
-                    <button className="flex items-center gap-1.5 text-sm text-white/60 hover:text-white/90">
+                    <button className="flex items-center gap-1.5 text-sm text-slate-500 dark:text-white/60 hover:text-slate-900 dark:text-white/90">
                       <Share2 className="h-4 w-4" />
                       分享
                     </button>
@@ -964,8 +964,8 @@ export function Discussion() {
           {filteredPosts.length === 0 && (
             <div className="glass neon-border p-12 text-center">
               <MessageSquare className="h-16 w-16 text-white/30 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-white/90 mb-2">暂无讨论</h3>
-              <p className="text-white/60 mb-6">
+              <h3 className="text-xl font-semibold text-slate-900 dark:text-white/90 mb-2">暂无讨论</h3>
+              <p className="text-slate-500 dark:text-white/60 mb-6">
                 {searchQuery ? '没有找到匹配的讨论内容' : '还没有人发起讨论，快来发布第一个话题吧！'}
               </p>
               <button
@@ -990,8 +990,8 @@ export function Discussion() {
                   <MessageSquare className="h-5 w-5 text-cyan-300" />
                 </div>
                 <div>
-                  <div className="font-semibold text-white/90">活跃讨论</div>
-                  <div className="text-sm text-white/60">今日新增 {Math.floor(Math.random() * 10) + 5} 条</div>
+                  <div className="font-semibold text-slate-900 dark:text-white/90">活跃讨论</div>
+                  <div className="text-sm text-slate-500 dark:text-white/60">今日新增 {Math.floor(Math.random() * 10) + 5} 条</div>
                 </div>
               </div>
             </div>
@@ -1001,8 +1001,8 @@ export function Discussion() {
                   <Bot className="h-5 w-5 text-purple-300" />
                 </div>
                 <div>
-                  <div className="font-semibold text-white/90">AI解答</div>
-                  <div className="text-sm text-white/60">已解答 {Math.floor(Math.random() * 50) + 30} 个问题</div>
+                  <div className="font-semibold text-slate-900 dark:text-white/90">AI解答</div>
+                  <div className="text-sm text-slate-500 dark:text-white/60">已解答 {Math.floor(Math.random() * 50) + 30} 个问题</div>
                 </div>
               </div>
             </div>
@@ -1012,8 +1012,8 @@ export function Discussion() {
                   <Award className="h-5 w-5 text-green-300" />
                 </div>
                 <div>
-                  <div className="font-semibold text-white/90">学习成就</div>
-                  <div className="text-sm text-white/60">{Math.floor(Math.random() * 100) + 50} 个知识点掌握</div>
+                  <div className="font-semibold text-slate-900 dark:text-white/90">学习成就</div>
+                  <div className="text-sm text-slate-500 dark:text-white/60">{Math.floor(Math.random() * 100) + 50} 个知识点掌握</div>
                 </div>
               </div>
             </div>

@@ -460,29 +460,29 @@ export function StudentQA() {
   )
 
   return (
-    <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-12 flex-1 min-h-0">
-      <div className="glass neon-border flex h-full flex-col lg:col-span-8">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 px-6 py-5">
+    <div className="flex flex-1 flex-col lg:flex-row gap-6 min-h-0">
+      <div className="glass flex flex-1 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/50">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-white/10 px-6 py-5">
           <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5">
               <CircleHelp className="h-6 w-6 text-indigo-200" />
             </div>
             <div>
-              <div className="text-lg font-semibold text-white/90">学生问答 · AI 引导式学习</div>
-              <div className="text-base text-white/60">课前预习 / 课堂互动 / 课后复盘一体化闭环</div>
+              <div className="text-lg font-semibold text-slate-900 dark:text-white/90">学生问答 · AI 引导式学习</div>
+              <div className="text-base text-slate-500 dark:text-slate-900 dark:text-white/60">课前预习 / 课堂互动 / 课后复盘一体化闭环</div>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="text-sm font-semibold text-white/80">场景：</span>
-            <div className="flex max-w-full flex-nowrap gap-1 overflow-x-auto rounded-xl border border-white/10 bg-white/5 p-1 app-scrollbar">
+            <span className="text-sm font-semibold text-slate-800 dark:text-slate-900 dark:text-white/80">场景：</span>
+            <div className="flex max-w-full flex-nowrap gap-1 overflow-x-auto rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-1 app-scrollbar">
               {(['课前预习', '课堂讲解', '课后巩固', '实验验证'] as const).map((s) => (
                 <button
                   key={s}
                   onClick={() => setScenario(s)}
                   className={cn(
                     'shrink-0 rounded-lg px-3 py-1.5 text-sm font-semibold transition whitespace-nowrap',
-                    scenario === s ? 'bg-white/10 text-white' : 'text-white/60 hover:text-white/85'
+                    scenario === s ? 'bg-slate-100 dark:bg-white/10 text-slate-900 dark:text-white' : 'text-slate-500 dark:text-slate-900 dark:text-white/60 hover:text-slate-800 dark:text-slate-900 dark:text-white/85'
                   )}
                 >
                   {s}
@@ -492,14 +492,14 @@ export function StudentQA() {
           </div>
         </div>
 
-        <div className="border-b border-white/10 px-6 py-4">
-          <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-cyan-300/15 bg-cyan-300/5 px-5 py-4">
+        <div className="border-b border-slate-200 dark:border-white/10 px-6 py-4">
+          <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-indigo-200 bg-indigo-50 dark:border-indigo-500/20 dark:bg-indigo-500/10 px-5 py-4">
             <div>
-              <div className="text-lg font-semibold text-white/90">{scenarioInfo.title}</div>
-              <div className="mt-1 text-base text-white/65">{scenarioInfo.subtitle}</div>
+              <div className="text-lg font-semibold text-slate-900 dark:text-white/90">{scenarioInfo.title}</div>
+              <div className="mt-1 text-base text-slate-600 dark:text-slate-900 dark:text-white/65">{scenarioInfo.subtitle}</div>
             </div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70">
-              <Rocket className="h-4 w-4 text-cyan-200" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 px-4 py-2 text-sm text-slate-600 dark:text-slate-900 dark:text-white/70">
+              <Rocket className="h-4 w-4 text-indigo-600 dark:text-indigo-300" />
               {scenarioInfo.focus}
             </div>
           </div>
@@ -511,28 +511,28 @@ export function StudentQA() {
               key={o.k}
               onClick={() => setChoice(o.k)}
               className={cn(
-                'group rounded-2xl border border-white/10 bg-white/5 p-5 text-left transition hover:bg-white/10 md:min-h-[138px]',
+                'group rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-5 text-left transition hover:bg-slate-100 dark:bg-white/10 md:min-h-[138px]',
                 choice === o.k ? 'neon-border' : ''
               )}
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <div className="text-xl font-bold text-white/90">{o.title}</div>
-                  <div className="mt-1 text-sm text-white/55">{o.sub}</div>
+                  <div className="text-xl font-bold text-slate-900 dark:text-white/90">{o.title}</div>
+                  <div className="mt-1 text-sm text-slate-900 dark:text-white/55">{o.sub}</div>
                 </div>
                 <div className="flex shrink-0 items-center gap-1.5">
-                  <span className="inline-flex items-center rounded-full border border-white/12 bg-white/5 px-2 py-0.5 text-xs font-semibold text-white/70 whitespace-nowrap">
+                  <span className="inline-flex items-center rounded-full border border-white/12 bg-slate-50 dark:bg-white/5 px-2 py-0.5 text-xs font-semibold text-slate-600 dark:text-slate-900 dark:text-white/70 whitespace-nowrap">
                     最大数量
                   </span>
-                  <span className="inline-flex items-center rounded-full border border-white/12 bg-white/5 px-2 py-0.5 text-xs font-semibold text-white/70 whitespace-nowrap">
+                  <span className="inline-flex items-center rounded-full border border-white/12 bg-slate-50 dark:bg-white/5 px-2 py-0.5 text-xs font-semibold text-slate-600 dark:text-slate-900 dark:text-white/70 whitespace-nowrap">
                     {o.k === 'D' ? 'O(2ⁿ)' : 'O(n log n)'}
                   </span>
                 </div>
               </div>
-              <div className="mt-3 text-base leading-relaxed text-white/70">{o.desc}</div>
-              <div className="mt-3 flex items-center justify-between text-base text-white/55">
+              <div className="mt-3 text-base leading-relaxed text-slate-600 dark:text-slate-900 dark:text-white/70">{o.desc}</div>
+              <div className="mt-3 flex items-center justify-between text-base text-slate-900 dark:text-white/55">
                 <span className="inline-flex items-center gap-2">
-                  <Sparkles className="h-4 w-4 text-white/60" />
+                  <Sparkles className="h-4 w-4 text-slate-500 dark:text-slate-900 dark:text-white/60" />
                   先选择，再提交
                 </span>
                 <span className="opacity-0 text-xl transition group-hover:opacity-100">→</span>
@@ -541,13 +541,13 @@ export function StudentQA() {
           ))}
         </div>
 
-        <div className="flex items-center justify-between gap-4 border-t border-white/10 px-6 py-5">
-          <div className="flex-1 text-base text-white/65">
-            <span className="text-lg font-semibold text-white/85">问题：</span>
+        <div className="flex items-center justify-between gap-4 border-t border-slate-200 dark:border-white/10 px-6 py-5">
+          <div className="flex-1 text-base text-slate-600 dark:text-slate-900 dark:text-white/65">
+            <span className="text-lg font-semibold text-slate-800 dark:text-slate-900 dark:text-white/85">问题：</span>
             {scenarioInfo.questionText}
           </div>
           <button onClick={onAsk} className="btn btn-primary neon-border px-5 py-2.5 text-sm whitespace-nowrap">
-            <Bot className="h-4 w-4 text-cyan-200" />
+            <Bot className="h-4 w-4 text-indigo-600 dark:text-indigo-300" />
             提交并解析
           </button>
         </div>
@@ -564,16 +564,16 @@ export function StudentQA() {
                   className={cn('flex items-start gap-4', m.role === 'user' ? 'justify-end' : 'justify-start')}
                 >
                   {m.role === 'ai' && (
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
-                      <Bot className="h-6 w-6 text-cyan-200" />
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5">
+                      <Bot className="h-6 w-6 text-indigo-600 dark:text-indigo-300" />
                     </div>
                   )}
                   <div
                     className={cn(
                       'w-fit max-w-[80ch] rounded-2xl border px-5 py-4 text-base leading-relaxed',
                       m.role === 'user'
-                        ? 'border-white/10 bg-white/10 text-white/90'
-                        : 'border-cyan-200/15 bg-gradient-to-b from-white/5 to-white/4 text-white/88'
+                        ? 'border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/10 text-slate-900 dark:text-white/90'
+                        : 'border-cyan-200/15 bg-gradient-to-b from-white/5 to-white/4 text-slate-900 dark:text-white/88'
                     )}
                   >
                     {m.role === 'ai' ? (
@@ -598,7 +598,7 @@ export function StudentQA() {
                     )}
                   </div>
                   {m.role === 'user' && (
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5">
                       <GraduationCap className="h-6 w-6 text-indigo-200" />
                     </div>
                   )}
@@ -611,14 +611,14 @@ export function StudentQA() {
         </div>
       </div>
 
-      <div className="space-y-6 lg:col-span-4">
+      <div className="flex w-full shrink-0 flex-col gap-6 lg:w-[400px] xl:w-[480px] overflow-y-auto pr-2 custom-scrollbar">
         <div className="glass neon-border p-6">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <div className="text-lg font-semibold text-white/90">课前课后互动闭环</div>
-              <div className="text-base text-white/60">纯前端模拟课前预习与课后巩固，无需后端支持</div>
+              <div className="text-lg font-semibold text-slate-900 dark:text-white/90">课前课后互动闭环</div>
+              <div className="text-base text-slate-500 dark:text-slate-900 dark:text-white/60">纯前端模拟课前预习与课后巩固，无需后端支持</div>
             </div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-4 py-2 text-sm font-semibold text-white/75">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-slate-50 dark:bg-white/5 px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white/75">
               <BadgeCheck className="h-4 w-4 text-emerald-200" />
               Demo 可直接使用
             </span>
@@ -628,20 +628,20 @@ export function StudentQA() {
             {interactionOverview.map((item) => {
               const percent = Math.round((item.count / item.total) * 100)
               return (
-                <div key={item.key} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <div key={item.key} className="rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-4">
                   <div className="flex items-center justify-between gap-3">
                     <div>
-                      <div className="text-base font-semibold text-white/85">{item.title}</div>
-                      <div className="mt-1 text-sm text-white/55">{item.summary}</div>
+                      <div className="text-base font-semibold text-slate-800 dark:text-slate-900 dark:text-white/85">{item.title}</div>
+                      <div className="mt-1 text-sm text-slate-900 dark:text-white/55">{item.summary}</div>
                     </div>
                     <div className="text-right">
-                      <div className="text-lg font-semibold text-white/90">
+                      <div className="text-lg font-semibold text-slate-900 dark:text-white/90">
                         {item.count}/{item.total}
                       </div>
-                      <div className="text-xs text-white/55">{percent}%</div>
+                      <div className="text-xs text-slate-900 dark:text-white/55">{percent}%</div>
                     </div>
                   </div>
-                  <div className="mt-3 h-2 rounded-full bg-white/10">
+                  <div className="mt-3 h-2 rounded-full bg-slate-100 dark:bg-white/10">
                     <div
                       className="h-2 rounded-full bg-gradient-to-r from-cyan-300/70 via-blue-300/60 to-emerald-300/70"
                       style={{ width: `${percent}%` }}
@@ -657,14 +657,14 @@ export function StudentQA() {
               const stage = quickInteractions[stageKey]
               const Icon = stage.icon
               return (
-                <div key={stageKey} className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                <div key={stageKey} className="rounded-2xl border border-slate-200 dark:border-white/10 bg-black/20 p-4">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
-                      <Icon className="h-5 w-5 text-cyan-200" />
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5">
+                      <Icon className="h-5 w-5 text-indigo-600 dark:text-indigo-300" />
                     </div>
                     <div>
-                      <div className="text-base font-semibold text-white/88">{stage.title}</div>
-                      <div className="text-sm text-white/55">{stage.subtitle}</div>
+                      <div className="text-base font-semibold text-slate-900 dark:text-white/88">{stage.title}</div>
+                      <div className="text-sm text-slate-900 dark:text-white/55">{stage.subtitle}</div>
                     </div>
                   </div>
 
@@ -673,14 +673,14 @@ export function StudentQA() {
                       <button
                         key={action.label}
                         onClick={() => handleQuickInteraction(stageKey, action)}
-                        className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-left transition hover:bg-white/10"
+                        className="w-full rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 px-4 py-3 text-left transition hover:bg-slate-100 dark:bg-white/10"
                       >
                         <div className="flex items-center justify-between gap-3">
                           <div>
-                            <div className="text-sm font-semibold text-white/88">{action.label}</div>
-                            <div className="mt-1 text-xs text-white/55">{action.helper}</div>
+                            <div className="text-sm font-semibold text-slate-900 dark:text-white/88">{action.label}</div>
+                            <div className="mt-1 text-xs text-slate-900 dark:text-white/55">{action.helper}</div>
                           </div>
-                          <span className="text-white/40">→</span>
+                          <span className="text-slate-900 dark:text-white/40">→</span>
                         </div>
                       </button>
                     ))}
@@ -694,22 +694,22 @@ export function StudentQA() {
         <div className="glass neon-border p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5">
                 <Radar className="h-6 w-6 text-fuchsia-200" />
               </div>
               <div>
-                <div className="text-lg font-semibold text-white/90">多维智能评价反馈</div>
-                <div className="text-base text-white/60">概念/证明/反例/编码/表达</div>
+                <div className="text-lg font-semibold text-slate-900 dark:text-white/90">多维智能评价反馈</div>
+                <div className="text-base text-slate-500 dark:text-slate-900 dark:text-white/60">概念/证明/反例/编码/表达</div>
               </div>
             </div>
             <div className="text-right text-base">
-              <div className="text-lg font-semibold text-white/85">{attempts} 次答题</div>
-              <div className="text-white/60">正确 {correct} 次</div>
+              <div className="text-lg font-semibold text-slate-800 dark:text-slate-900 dark:text-white/85">{attempts} 次答题</div>
+              <div className="text-slate-500 dark:text-slate-900 dark:text-white/60">正确 {correct} 次</div>
             </div>
           </div>
 
           <div className="mt-5 grid gap-5">
-            <div className="h-[260px] rounded-2xl border border-white/10 bg-black/20 p-3">
+            <div className="h-[260px] rounded-2xl border border-slate-200 dark:border-white/10 bg-black/20 p-3">
               <ResponsiveContainer width="100%" height="100%">
                 <RadarChart data={radarData}>
                   <PolarGrid stroke="rgba(255,255,255,0.10)" />
@@ -720,10 +720,10 @@ export function StudentQA() {
               </ResponsiveContainer>
             </div>
 
-            <div className="h-[200px] rounded-2xl border border-white/10 bg-black/20 p-3">
+            <div className="h-[200px] rounded-2xl border border-slate-200 dark:border-white/10 bg-black/20 p-3">
               <div className="mb-3 flex items-center justify-between px-2">
-                <div className="text-base font-semibold text-white/80">学情数据采集与分析</div>
-                <div className="text-base text-white/60">正确率走势</div>
+                <div className="text-base font-semibold text-slate-800 dark:text-slate-900 dark:text-white/80">学情数据采集与分析</div>
+                <div className="text-base text-slate-500 dark:text-slate-900 dark:text-white/60">正确率走势</div>
               </div>
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={timeline}>
@@ -754,22 +754,22 @@ export function StudentQA() {
 
         <div className="glass neon-border p-6">
           <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
-              <Library className="h-6 w-6 text-cyan-200" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5">
+              <Library className="h-6 w-6 text-indigo-600 dark:text-indigo-300" />
             </div>
             <div>
-              <div className="text-lg font-semibold text-white/90">数字资源整合与运用</div>
-              <div className="text-base text-white/60">资源会随当前教学阶段切换</div>
+              <div className="text-lg font-semibold text-slate-900 dark:text-white/90">数字资源整合与运用</div>
+              <div className="text-base text-slate-500 dark:text-slate-900 dark:text-white/60">资源会随当前教学阶段切换</div>
             </div>
           </div>
           <div className="mt-5 space-y-3">
             {resources.map((r) => (
               <div
                 key={r.title}
-                className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-base"
+                className="flex items-center justify-between rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 px-5 py-4 text-base"
               >
-                <div className="flex-1 pr-4 text-white/85">{r.title}</div>
-                <span className="shrink-0 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-white/65 whitespace-nowrap">
+                <div className="flex-1 pr-4 text-slate-800 dark:text-slate-900 dark:text-white/85">{r.title}</div>
+                <span className="shrink-0 rounded-full border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 px-3 py-1 text-sm text-slate-600 dark:text-slate-900 dark:text-white/65 whitespace-nowrap">
                   {r.tag}
                 </span>
               </div>
@@ -780,15 +780,15 @@ export function StudentQA() {
         <div className="glass neon-border p-6">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <div className="text-lg font-semibold text-white/90">创新点：前中后贯通式互动</div>
-              <div className="text-base text-white/60">从预习提问到课后复盘都挂接在同一条学习路径上</div>
+              <div className="text-lg font-semibold text-slate-900 dark:text-white/90">创新点：前中后贯通式互动</div>
+              <div className="text-base text-slate-500 dark:text-slate-900 dark:text-white/60">从预习提问到课后复盘都挂接在同一条学习路径上</div>
             </div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-4 py-2 text-base font-semibold text-white/75">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-slate-50 dark:bg-white/5 px-4 py-2 text-base font-semibold text-slate-900 dark:text-white/75">
               {hasSubmitted ? '已生成学习建议' : '互动后生成'}
             </span>
           </div>
-          <div className="mt-5 rounded-2xl border border-white/10 bg-black/20 p-5 text-base leading-relaxed text-white/75">
-            <div className="text-lg font-semibold text-white/85">个性化学习支持（自动生成）</div>
+          <div className="mt-5 rounded-2xl border border-slate-200 dark:border-white/10 bg-black/20 p-5 text-base leading-relaxed text-slate-900 dark:text-white/75">
+            <div className="text-lg font-semibold text-slate-800 dark:text-slate-900 dark:text-white/85">个性化学习支持（自动生成）</div>
             <ul className="mt-3 list-disc space-y-2 pl-6 text-base">
               {!hasSubmitted ? (
                 <>
@@ -806,8 +806,8 @@ export function StudentQA() {
         </div>
 
         <div className="glass neon-border p-6">
-          <div className="text-lg font-semibold text-white/90">师生机协同教学</div>
-          <div className="mt-3 text-base text-white/60">
+          <div className="text-lg font-semibold text-slate-900 dark:text-white/90">师生机协同教学</div>
+          <div className="mt-3 text-base text-slate-500 dark:text-slate-900 dark:text-white/60">
             教师可在课堂投屏时统一讲解，学生侧则用课前/课后快捷互动完成预热与复盘，形成完整的教学闭环。
           </div>
         </div>

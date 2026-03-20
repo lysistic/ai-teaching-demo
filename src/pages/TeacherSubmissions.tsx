@@ -254,7 +254,7 @@ export function TeacherSubmissions() {
       case 'Runtime Error':
         return 'text-purple-400'
       default:
-        return 'text-white/60'
+        return 'text-slate-500 dark:text-white/60'
     }
   }
 
@@ -271,7 +271,7 @@ export function TeacherSubmissions() {
       case 'Runtime Error':
         return 'bg-purple-400/10 border-purple-400/30'
       default:
-        return 'bg-white/5 border-white/10'
+        return 'bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/10'
     }
   }
 
@@ -283,16 +283,16 @@ export function TeacherSubmissions() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="flex items-center gap-3 text-2xl font-bold text-white/90">
+          <h1 className="flex items-center gap-3 text-2xl font-bold text-slate-900 dark:text-white/90">
             <FileCode className="h-7 w-7 text-cyan-300" />
             学生提交记录与排行榜
           </h1>
-          <p className="mt-1 text-white/60">前端静态数据演示课后加权后的综合评价与提交分析</p>
+          <p className="mt-1 text-slate-500 dark:text-white/60">前端静态数据演示课后加权后的综合评价与提交分析</p>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={() => setViewMode(viewMode === 'list' ? 'stats' : 'list')}
-            className="btn bg-white/5 hover:bg-white/10"
+            className="btn bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:bg-white/10"
           >
             {viewMode === 'list' ? (
               <>
@@ -325,11 +325,11 @@ export function TeacherSubmissions() {
       <div className="glass neon-border p-5">
         <div className="flex items-center justify-between gap-4">
           <div>
-            <h2 className="flex items-center gap-2 text-lg font-semibold text-white/90">
+            <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-white/90">
               <Sparkles className="h-5 w-5 text-cyan-300" />
               课后加权规则
             </h2>
-            <div className="mt-1 text-sm text-white/60">
+            <div className="mt-1 text-sm text-slate-500 dark:text-white/60">
               排行榜综合得分 = 课堂基础 {Math.round(POST_CLASS_WEIGHT_CONFIG.classroom * 100)}% + 课后复盘 {Math.round(POST_CLASS_WEIGHT_CONFIG.postClass * 100)}%
             </div>
           </div>
@@ -348,20 +348,20 @@ export function TeacherSubmissions() {
 
       <div className="glass neon-border p-5">
         <div className="flex items-center justify-between">
-          <h2 className="flex items-center gap-2 text-lg font-semibold text-white/90">
+          <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-white/90">
             <Filter className="h-5 w-5 text-cyan-300" />
             筛选条件
           </h2>
-          <div className="text-sm text-white/60">共 {filteredSubmissions.length} 条记录</div>
+          <div className="text-sm text-slate-500 dark:text-white/60">共 {filteredSubmissions.length} 条记录</div>
         </div>
 
         <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-4">
           <div>
-            <label className="mb-2 block text-sm text-white/60">班级筛选</label>
+            <label className="mb-2 block text-sm text-slate-500 dark:text-white/60">班级筛选</label>
             <select
               value={selectedClass}
               onChange={(e) => setSelectedClass(e.target.value as 'all' | '1班' | '2班')}
-              className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white/90 focus:outline-none focus:border-cyan-500/50"
+              className="w-full rounded-lg border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 px-3 py-2 text-slate-900 dark:text-white/90 focus:outline-none focus:border-cyan-500/50"
             >
               <option value="all">所有班级</option>
               <option value="1班">1班</option>
@@ -370,11 +370,11 @@ export function TeacherSubmissions() {
           </div>
 
           <div>
-            <label className="mb-2 block text-sm text-white/60">题目筛选</label>
+            <label className="mb-2 block text-sm text-slate-500 dark:text-white/60">题目筛选</label>
             <select
               value={selectedProblem}
               onChange={(e) => setSelectedProblem(e.target.value === 'all' ? 'all' : parseInt(e.target.value))}
-              className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white/90 focus:outline-none focus:border-cyan-500/50"
+              className="w-full rounded-lg border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 px-3 py-2 text-slate-900 dark:text-white/90 focus:outline-none focus:border-cyan-500/50"
             >
               <option value="all">所有题目</option>
               {mockProblems.map((problem) => (
@@ -386,11 +386,11 @@ export function TeacherSubmissions() {
           </div>
 
           <div>
-            <label className="mb-2 block text-sm text-white/60">状态筛选</label>
+            <label className="mb-2 block text-sm text-slate-500 dark:text-white/60">状态筛选</label>
             <select
               value={selectedStatus}
               onChange={(e) => setSelectedStatus(e.target.value)}
-              className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white/90 focus:outline-none focus:border-cyan-500/50"
+              className="w-full rounded-lg border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 px-3 py-2 text-slate-900 dark:text-white/90 focus:outline-none focus:border-cyan-500/50"
             >
               <option value="all">所有状态</option>
               <option value="Accepted">通过</option>
@@ -402,11 +402,11 @@ export function TeacherSubmissions() {
           </div>
 
           <div>
-            <label className="mb-2 block text-sm text-white/60">阶段筛选</label>
+            <label className="mb-2 block text-sm text-slate-500 dark:text-white/60">阶段筛选</label>
             <select
               value={selectedPhase}
               onChange={(e) => setSelectedPhase(e.target.value as 'all' | '课堂' | '课后')}
-              className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white/90 focus:outline-none focus:border-cyan-500/50"
+              className="w-full rounded-lg border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 px-3 py-2 text-slate-900 dark:text-white/90 focus:outline-none focus:border-cyan-500/50"
             >
               <option value="all">全部阶段</option>
               <option value="课堂">课堂</option>
@@ -419,10 +419,10 @@ export function TeacherSubmissions() {
       {viewMode === 'list' ? (
         <>
           <div className="glass neon-border p-5">
-            <h2 className="mb-4 text-lg font-semibold text-white/90">提交记录列表</h2>
+            <h2 className="mb-4 text-lg font-semibold text-slate-900 dark:text-white/90">提交记录列表</h2>
             <div className="overflow-x-auto">
               <table className="w-full text-left">
-                <thead className="bg-white/5 text-white/70">
+                <thead className="bg-slate-50 dark:bg-white/5 text-slate-700 dark:text-white/70">
                   <tr>
                     <th className="rounded-l-xl px-5 py-4">学生</th>
                     <th className="px-5 py-4">题目</th>
@@ -440,23 +440,23 @@ export function TeacherSubmissions() {
                     const problem = mockProblems.find((item) => item.id === submission.problemId)
 
                     return (
-                      <tr key={submission.id} className="border-t border-white/10 hover:bg-white/5">
+                      <tr key={submission.id} className="border-t border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:bg-white/5">
                         <td className="px-5 py-4">
                           <div className="flex items-center gap-3">
                             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20">
-                              <span className="font-semibold text-white/90">{student?.avatar}</span>
+                              <span className="font-semibold text-slate-900 dark:text-white/90">{student?.avatar}</span>
                             </div>
                             <div>
-                              <div className="font-medium text-white/90">{student?.name}</div>
-                              <div className="text-xs text-white/60">{student?.class}</div>
+                              <div className="font-medium text-slate-900 dark:text-white/90">{student?.name}</div>
+                              <div className="text-xs text-slate-500 dark:text-white/60">{student?.class}</div>
                             </div>
                           </div>
                         </td>
                         <td className="px-5 py-4">
-                          <div className="max-w-[150px] truncate font-medium text-white/90" title={problem?.title}>
+                          <div className="max-w-[150px] truncate font-medium text-slate-900 dark:text-white/90" title={problem?.title}>
                             {problem?.title}
                           </div>
-                          <div className="text-xs text-white/60">{problem?.difficulty}</div>
+                          <div className="text-xs text-slate-500 dark:text-white/60">{problem?.difficulty}</div>
                         </td>
                         <td className="px-5 py-4">
                           <span
@@ -482,13 +482,13 @@ export function TeacherSubmissions() {
                             {submission.status}
                           </span>
                         </td>
-                        <td className="px-5 py-4 text-white/90">{submission.runtime}</td>
-                        <td className="px-5 py-4 text-white/90">{submission.memory}</td>
-                        <td className="px-5 py-4 text-white/90">{submission.time}</td>
+                        <td className="px-5 py-4 text-slate-900 dark:text-white/90">{submission.runtime}</td>
+                        <td className="px-5 py-4 text-slate-900 dark:text-white/90">{submission.memory}</td>
+                        <td className="px-5 py-4 text-slate-900 dark:text-white/90">{submission.time}</td>
                         <td className="px-5 py-4">
                           <button
                             onClick={() => handleViewCode(submission)}
-                            className="btn bg-white/5 hover:bg-white/10 text-sm"
+                            className="btn bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:bg-white/10 text-sm"
                           >
                             <Eye className="h-4 w-4" />
                             查看代码
@@ -503,7 +503,7 @@ export function TeacherSubmissions() {
           </div>
 
           <div className="glass neon-border p-5">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-white/90">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-white/90">
               <Trophy className="h-5 w-5 text-yellow-400" />
               学生排行榜
             </h2>
@@ -515,7 +515,7 @@ export function TeacherSubmissions() {
                     'rounded-xl border p-4 transition-all',
                     index < 3
                       ? 'border-yellow-500/30 bg-yellow-500/5 neon-border'
-                      : 'border-white/10 bg-white/5 hover:bg-white/10'
+                      : 'border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:bg-white/10'
                   )}
                 >
                   <div className="flex items-center justify-between">
@@ -533,7 +533,7 @@ export function TeacherSubmissions() {
                                 ? 'bg-gradient-to-br from-gray-400/30 to-gray-500/20'
                                 : index === 2
                                   ? 'bg-gradient-to-br from-orange-500/30 to-orange-600/20'
-                                  : 'bg-white/5'
+                                  : 'bg-slate-50 dark:bg-white/5'
                           )}
                         >
                           {index < 3 ? (
@@ -548,28 +548,28 @@ export function TeacherSubmissions() {
                               )}
                             />
                           ) : (
-                            <span className="font-bold text-white/90">{index + 1}</span>
+                            <span className="font-bold text-slate-900 dark:text-white/90">{index + 1}</span>
                           )}
                         </div>
                       </div>
 
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="font-semibold text-white/90">{student.name}</span>
+                          <span className="font-semibold text-slate-900 dark:text-white/90">{student.name}</span>
                           <span className="chip text-xs">{student.class}</span>
                           <span className="chip text-xs bg-emerald-400/10 text-emerald-300">
                             课后 +{student.postBoost}
                           </span>
                         </div>
-                        <div className="mt-1 text-sm text-white/60">
+                        <div className="mt-1 text-sm text-slate-500 dark:text-white/60">
                           课堂基础 {student.classroomScore} 分 · 课后加权 {student.postClassWeightedScore} 分
                         </div>
                       </div>
                     </div>
 
                     <div className="text-right">
-                      <div className="text-2xl font-bold text-white/90">{student.score} 分</div>
-                      <div className="text-sm text-white/60">综合得分</div>
+                      <div className="text-2xl font-bold text-slate-900 dark:text-white/90">{student.score} 分</div>
+                      <div className="text-sm text-slate-500 dark:text-white/60">综合得分</div>
                     </div>
                   </div>
 
@@ -589,7 +589,7 @@ export function TeacherSubmissions() {
       ) : (
         <div className="space-y-6">
           <div className="glass neon-border p-5">
-            <h2 className="mb-4 text-lg font-semibold text-white/90">提交趋势</h2>
+            <h2 className="mb-4 text-lg font-semibold text-slate-900 dark:text-white/90">提交趋势</h2>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={submissionTrend}>
@@ -615,7 +615,7 @@ export function TeacherSubmissions() {
           </div>
 
           <div className="glass neon-border p-5">
-            <h2 className="mb-4 text-lg font-semibold text-white/90">提交状态分布</h2>
+            <h2 className="mb-4 text-lg font-semibold text-slate-900 dark:text-white/90">提交状态分布</h2>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={statusDistribution}>
@@ -658,20 +658,20 @@ export function TeacherSubmissions() {
 
             <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-5">
               {statusDistribution.map((item) => (
-                <div key={item.status} className="rounded-lg border border-white/10 bg-white/5 p-3">
+                <div key={item.status} className="rounded-lg border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-3">
                   <div className="flex items-center justify-between">
                     <span className={cn('text-sm font-medium', getStatusColor(item.status))}>{item.status}</span>
-                    <span className="text-xs text-white/60">{item.percentage}%</span>
+                    <span className="text-xs text-slate-500 dark:text-white/60">{item.percentage}%</span>
                   </div>
-                  <div className="mt-2 text-2xl font-bold text-white/90">{item.count}</div>
-                  <div className="text-xs text-white/60">提交次数</div>
+                  <div className="mt-2 text-2xl font-bold text-slate-900 dark:text-white/90">{item.count}</div>
+                  <div className="text-xs text-slate-500 dark:text-white/60">提交次数</div>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="glass neon-border p-5">
-            <h2 className="mb-4 text-lg font-semibold text-white/90">课后加权贡献榜</h2>
+            <h2 className="mb-4 text-lg font-semibold text-slate-900 dark:text-white/90">课后加权贡献榜</h2>
             <div className="h-72">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={boostContributionData}>
@@ -703,10 +703,10 @@ export function TeacherSubmissions() {
       {selectedSubmission && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
           <div className="glass neon-border mx-4 max-h-[80vh] w-full max-w-4xl overflow-hidden">
-            <div className="border-b border-white/10 p-5">
+            <div className="border-b border-slate-200 dark:border-white/10 p-5">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-white/90">代码详情</h3>
-                <button onClick={() => setSelectedSubmission(null)} className="btn bg-white/5 hover:bg-white/10">
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white/90">代码详情</h3>
+                <button onClick={() => setSelectedSubmission(null)} className="btn bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:bg-white/10">
                   关闭
                 </button>
               </div>
@@ -729,7 +729,7 @@ export function TeacherSubmissions() {
             <div className="max-h-[50vh] overflow-y-auto p-5">
               <div className="relative">
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5" />
-                <pre className="relative overflow-x-auto rounded-xl border border-white/10 bg-black/30 p-4 font-mono text-sm text-white/90">
+                <pre className="relative overflow-x-auto rounded-xl border border-slate-200 dark:border-white/10 bg-black/30 p-4 font-mono text-sm text-slate-900 dark:text-white/90">
                   {selectedSubmission.code}
                 </pre>
               </div>
@@ -741,9 +741,9 @@ export function TeacherSubmissions() {
               </div>
             </div>
 
-            <div className="border-t border-white/10 p-5">
+            <div className="border-t border-slate-200 dark:border-white/10 p-5">
               <div className="flex justify-end gap-3">
-                <button className="btn bg-white/5 hover:bg-white/10">
+                <button className="btn bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:bg-white/10">
                   <Download className="h-4 w-4" />
                   下载代码
                 </button>
@@ -810,9 +810,9 @@ function MetricCard({
           <Icon className="h-6 w-6" />
         </div>
         <div>
-          <div className="text-sm text-white/60">{label}</div>
-          <div className="text-2xl font-bold text-white/90">{value}</div>
-          <div className="text-xs text-white/60">{sub}</div>
+          <div className="text-sm text-slate-500 dark:text-white/60">{label}</div>
+          <div className="text-2xl font-bold text-slate-900 dark:text-white/90">{value}</div>
+          <div className="text-xs text-slate-500 dark:text-white/60">{sub}</div>
         </div>
       </div>
     </div>
@@ -821,19 +821,19 @@ function MetricCard({
 
 function RuleCard({ title, value, desc }: { title: string; value: string; desc: string }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+    <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-4">
       <div className="text-sm text-white/55">{title}</div>
-      <div className="mt-2 text-2xl font-bold text-white/90">{value}</div>
-      <div className="mt-2 text-sm leading-relaxed text-white/60">{desc}</div>
+      <div className="mt-2 text-2xl font-bold text-slate-900 dark:text-white/90">{value}</div>
+      <div className="mt-2 text-sm leading-relaxed text-slate-500 dark:text-white/60">{desc}</div>
     </div>
   )
 }
 
 function RankMetric({ label, value }: { label: string; value: string | number }) {
   return (
-    <div className="rounded-lg bg-white/5 p-2 text-center">
-      <div className="text-xs text-white/60">{label}</div>
-      <div className="text-lg font-semibold text-white/90">{value}</div>
+    <div className="rounded-lg bg-slate-50 dark:bg-white/5 p-2 text-center">
+      <div className="text-xs text-slate-500 dark:text-white/60">{label}</div>
+      <div className="text-lg font-semibold text-slate-900 dark:text-white/90">{value}</div>
     </div>
   )
 }
@@ -850,9 +850,9 @@ function InfoCard({
   valueClass?: string
 }) {
   return (
-    <div className={cn('rounded-lg border border-white/10 bg-white/5 p-3', centered && 'text-center')}>
-      <div className="text-xs text-white/60">{label}</div>
-      <div className={cn('font-medium text-white/90', valueClass)}>{value}</div>
+    <div className={cn('rounded-lg border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-3', centered && 'text-center')}>
+      <div className="text-xs text-slate-500 dark:text-white/60">{label}</div>
+      <div className={cn('font-medium text-slate-900 dark:text-white/90', valueClass)}>{value}</div>
     </div>
   )
 }
@@ -881,8 +881,8 @@ function FooterCard({
           <Icon className="h-5 w-5" />
         </div>
         <div>
-          <div className="font-semibold text-white/90">{title}</div>
-          <div className="text-sm text-white/60">{desc}</div>
+          <div className="font-semibold text-slate-900 dark:text-white/90">{title}</div>
+          <div className="text-sm text-slate-500 dark:text-white/60">{desc}</div>
         </div>
       </div>
     </div>

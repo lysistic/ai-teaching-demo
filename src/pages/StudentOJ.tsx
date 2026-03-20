@@ -194,13 +194,13 @@ type SubmissionResult = {
 const formatDescription = (text: string) => {
   return text.split('\n').map((line, index) => {
     if (line.startsWith('## ')) {
-      return <h3 key={index} className="text-lg font-semibold text-white/90 mt-4 mb-2">{line.substring(3)}</h3>
+      return <h3 key={index} className="text-lg font-semibold text-slate-900 dark:text-white/90 mt-4 mb-2">{line.substring(3)}</h3>
     } else if (line.startsWith('**')) {
       const parts = line.split('**')
       return (
         <p key={index} className="my-2">
           {parts.map((part, i) => 
-            i % 2 === 1 ? <strong key={i} className="text-white/90">{part}</strong> : part
+            i % 2 === 1 ? <strong key={i} className="text-slate-900 dark:text-white/90">{part}</strong> : part
           )}
         </p>
       )
@@ -324,7 +324,7 @@ export function StudentOJ() {
       case '简单': return 'text-green-400'
       case '中等': return 'text-yellow-400'
       case '困难': return 'text-red-400'
-      default: return 'text-white/60'
+      default: return 'text-slate-500 dark:text-white/60'
     }
   }
 
@@ -340,13 +340,13 @@ export function StudentOJ() {
           )}
         >
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-white/90 flex items-center gap-2">
-              <FileCode className="h-5 w-5 text-cyan-300" />
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-white/90 flex items-center gap-2">
+              <FileCode className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
               {sidebarCollapsed ? '题库' : '题目列表'}
             </h2>
             <button
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-              className="btn bg-white/5 hover:bg-white/10"
+              className="btn bg-white dark:bg-white/5 hover:bg-slate-100 dark:bg-white/10"
             >
               {sidebarCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
             </button>
@@ -362,13 +362,13 @@ export function StudentOJ() {
                     'w-full text-left p-4 rounded-xl border transition-all',
                     currentProblem.id === problem.id
                       ? 'border-cyan-500/50 bg-cyan-500/5 neon-border'
-                      : 'border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20'
+                      : 'border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-slate-100 dark:bg-white/10 hover:border-white/20'
                   )}
                 >
                   <div className="flex items-start justify-between">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-medium text-white/90">{problem.title}</span>
+                        <span className="font-medium text-slate-900 dark:text-white/90">{problem.title}</span>
                         <span className={cn('chip text-xs', getDifficultyColor(problem.difficulty))}>
                           {problem.difficulty}
                         </span>
@@ -389,11 +389,11 @@ export function StudentOJ() {
 
           {sidebarCollapsed && (
             <div className="space-y-3">
-              <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-center">
-                <div className="text-2xl font-bold text-white/90">{mockProblems.length}</div>
+              <div className="rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 p-4 text-center">
+                <div className="text-2xl font-bold text-slate-900 dark:text-white/90">{mockProblems.length}</div>
                 <div className="mt-1 text-xs text-white/55">当前题库</div>
               </div>
-              <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-center">
+              <div className="rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 p-4 text-center">
                 <div className="text-sm font-semibold text-white/85">{currentProblem.title}</div>
                 <div className="mt-2 text-xs text-white/55">点击箭头展开切换题目</div>
               </div>
@@ -405,14 +405,14 @@ export function StudentOJ() {
         <div className="flex-1 glass neon-border p-5">
           <div className="mb-4 flex flex-col gap-4 2xl:flex-row 2xl:items-start 2xl:justify-between">
             <div className="min-w-0">
-              <h1 className="text-xl font-bold text-white/90 flex items-center gap-3">
-                <Code className="h-6 w-6 text-cyan-300" />
+              <h1 className="text-xl font-bold text-slate-900 dark:text-white/90 flex items-center gap-3">
+                <Code className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
                 <span className="truncate">{currentProblem.title}</span>
                 <span className={cn('chip', getDifficultyColor(currentProblem.difficulty))}>
                   {currentProblem.difficulty}
                 </span>
               </h1>
-              <p className="text-white/60 mt-1">
+              <p className="text-slate-500 dark:text-white/60 mt-1">
                 编写代码解决这个问题，点击运行测试你的解法
               </p>
             </div>
@@ -420,14 +420,14 @@ export function StudentOJ() {
               <select 
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
-                className="bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-sm text-white/90 min-w-32"
+                className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-1.5 text-sm text-slate-900 dark:text-white/90 min-w-32"
               >
                 <option value="typescript">TypeScript</option>
                 <option value="javascript">JavaScript</option>
                 <option value="python">Python</option>
                 <option value="java">Java</option>
               </select>
-              <button className="btn bg-white/5 hover:bg-white/10">
+              <button className="btn bg-white dark:bg-white/5 hover:bg-slate-100 dark:bg-white/10">
                 <Save className="h-4 w-4" />
                 保存
               </button>
@@ -470,19 +470,19 @@ export function StudentOJ() {
 
           {/* 当前题目信息 */}
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
-            <div className="text-center p-3 rounded-lg bg-white/5">
-              <div className="text-sm text-white/60">测试用例</div>
-              <div className="text-lg font-semibold text-white/90">{currentProblem.testCases.length} 个</div>
+            <div className="text-center p-3 rounded-lg bg-white dark:bg-white/5">
+              <div className="text-sm text-slate-500 dark:text-white/60">测试用例</div>
+              <div className="text-lg font-semibold text-slate-900 dark:text-white/90">{currentProblem.testCases.length} 个</div>
             </div>
-            <div className="text-center p-3 rounded-lg bg-white/5">
-              <div className="text-sm text-white/60">难度</div>
+            <div className="text-center p-3 rounded-lg bg-white dark:bg-white/5">
+              <div className="text-sm text-slate-500 dark:text-white/60">难度</div>
               <div className={cn('text-lg font-semibold', getDifficultyColor(currentProblem.difficulty))}>
                 {currentProblem.difficulty}
               </div>
             </div>
-            <div className="text-center p-3 rounded-lg bg-white/5">
-              <div className="text-sm text-white/60">标签</div>
-              <div className="text-sm font-semibold text-white/90 truncate" title={currentProblem.tags.join(', ')}>
+            <div className="text-center p-3 rounded-lg bg-white dark:bg-white/5">
+              <div className="text-sm text-slate-500 dark:text-white/60">标签</div>
+              <div className="text-sm font-semibold text-slate-900 dark:text-white/90 truncate" title={currentProblem.tags.join(', ')}>
                 {currentProblem.tags.join(', ')}
               </div>
             </div>
@@ -494,7 +494,7 @@ export function StudentOJ() {
       <div className="grid gap-4 2xl:grid-cols-[minmax(0,1.45fr)_minmax(320px,380px)]">
         {/* 题目描述 */}
         <div className="glass neon-border min-h-[340px] p-5">
-          <h2 className="text-lg font-semibold text-white/90 mb-4">📖 题目描述</h2>
+          <h2 className="text-lg font-semibold text-slate-900 dark:text-white/90 mb-4">📖 题目描述</h2>
           <div className="app-scrollbar max-h-[420px] overflow-y-auto">
             <div className="prose prose-invert max-w-none">
               {formatDescription(currentProblem.description)}
@@ -504,20 +504,20 @@ export function StudentOJ() {
 
         {/* 测试用例 */}
         <div className="glass neon-border min-h-[340px] p-5">
-          <h2 className="text-lg font-semibold text-white/90 mb-4">🧪 测试用例</h2>
+          <h2 className="text-lg font-semibold text-slate-900 dark:text-white/90 mb-4">🧪 测试用例</h2>
           <div className="app-scrollbar max-h-[420px] space-y-3 overflow-y-auto">
             {currentProblem.testCases.map((testCase, index) => (
-              <div key={index} className="p-3 rounded-lg border border-white/10 bg-white/5">
-                <div className="text-sm font-medium text-white/90 mb-2">用例 {index + 1}</div>
-                <div className="text-xs text-white/60 mb-1">
-                  <span className="text-white/40">输入:</span>
-                  <div className="font-mono mt-1 p-2 bg-black/20 rounded overflow-x-auto">
+              <div key={index} className="p-3 rounded-lg border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5">
+                <div className="text-sm font-medium text-slate-900 dark:text-white/90 mb-2">用例 {index + 1}</div>
+                <div className="text-xs text-slate-500 dark:text-white/60 mb-1">
+                  <span className="text-slate-400 dark:text-white/40">输入:</span>
+                  <div className="font-mono mt-1 p-2 bg-slate-50 dark:bg-black/20 rounded overflow-x-auto">
                     {JSON.stringify(testCase.input)}
                   </div>
                 </div>
-                <div className="text-xs text-white/60">
-                  <span className="text-white/40">输出:</span>
-                  <div className="font-mono mt-1 p-2 bg-black/20 rounded overflow-x-auto">
+                <div className="text-xs text-slate-500 dark:text-white/60">
+                  <span className="text-slate-400 dark:text-white/40">输出:</span>
+                  <div className="font-mono mt-1 p-2 bg-slate-50 dark:bg-black/20 rounded overflow-x-auto">
                     {JSON.stringify(testCase.output)}
                   </div>
                 </div>
@@ -531,11 +531,11 @@ export function StudentOJ() {
         {/* 代码编辑器 */}
         <div className="glass neon-border p-5">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-white/90 flex items-center gap-2">
-              <Terminal className="h-5 w-5 text-cyan-300" />
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-white/90 flex items-center gap-2">
+              <Terminal className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
               代码编辑器
             </h2>
-            <div className="text-sm text-white/40">
+            <div className="text-sm text-slate-400 dark:text-white/40">
               {code.length} 字符
             </div>
           </div>
@@ -544,7 +544,7 @@ export function StudentOJ() {
             <textarea
               value={code}
               onChange={(e) => setCode(e.target.value)}
-              className="relative h-[420px] w-full resize-y rounded-xl border border-white/10 bg-black/30 p-4 font-mono text-sm text-white/90 focus:outline-none focus:border-cyan-500/50"
+              className="relative h-[420px] w-full resize-y rounded-xl border border-slate-200 dark:border-white/10 bg-black/30 p-4 font-mono text-sm text-slate-900 dark:text-white/90 focus:outline-none focus:border-cyan-500/50"
               spellCheck="false"
             />
           </div>
@@ -552,7 +552,7 @@ export function StudentOJ() {
 
         {/* 运行结果 */}
         <div className="glass neon-border p-5 2xl:sticky 2xl:top-28">
-          <h2 className="text-lg font-semibold text-white/90 mb-4">📊 运行结果</h2>
+          <h2 className="text-lg font-semibold text-slate-900 dark:text-white/90 mb-4">📊 运行结果</h2>
         
           {submissionResult ? (
             <div className="space-y-4">
@@ -566,40 +566,40 @@ export function StudentOJ() {
                     )}
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-white/90">
+                    <h3 className="text-xl font-semibold text-slate-900 dark:text-white/90">
                       {submissionResult.status}
                     </h3>
-                    <p className="text-sm text-white/60">{submissionResult.message}</p>
+                    <p className="text-sm text-slate-500 dark:text-white/60">{submissionResult.message}</p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-2xl font-bold text-white/90">
+                  <div className="text-2xl font-bold text-slate-900 dark:text-white/90">
                     {submissionResult.passedTests}/{submissionResult.totalTests}
                   </div>
-                  <div className="text-sm text-white/60">测试用例通过</div>
+                  <div className="text-sm text-slate-500 dark:text-white/60">测试用例通过</div>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <div className="text-center p-3 rounded-lg bg-white/5">
-                  <div className="text-sm text-white/60 mb-1">运行时间</div>
-                  <div className="text-lg font-semibold text-white/90 truncate" title={submissionResult.runtime}>
+                <div className="text-center p-3 rounded-lg bg-white dark:bg-white/5">
+                  <div className="text-sm text-slate-500 dark:text-white/60 mb-1">运行时间</div>
+                  <div className="text-lg font-semibold text-slate-900 dark:text-white/90 truncate" title={submissionResult.runtime}>
                     {submissionResult.runtime}
                   </div>
                 </div>
-                <div className="text-center p-3 rounded-lg bg-white/5">
-                  <div className="text-sm text-white/60 mb-1">内存使用</div>
-                  <div className="text-lg font-semibold text-white/90 truncate" title={submissionResult.memory}>
+                <div className="text-center p-3 rounded-lg bg-white dark:bg-white/5">
+                  <div className="text-sm text-slate-500 dark:text-white/60 mb-1">内存使用</div>
+                  <div className="text-lg font-semibold text-slate-900 dark:text-white/90 truncate" title={submissionResult.memory}>
                     {submissionResult.memory}
                   </div>
                 </div>
-                <div className="text-center p-3 rounded-lg bg-white/5">
-                  <div className="text-sm text-white/60 mb-1">代码长度</div>
-                  <div className="text-lg font-semibold text-white/90">{code.length} 字符</div>
+                <div className="text-center p-3 rounded-lg bg-white dark:bg-white/5">
+                  <div className="text-sm text-slate-500 dark:text-white/60 mb-1">代码长度</div>
+                  <div className="text-lg font-semibold text-slate-900 dark:text-white/90">{code.length} 字符</div>
                 </div>
-                <div className="text-center p-3 rounded-lg bg-white/5">
-                  <div className="text-sm text-white/60 mb-1">语言</div>
-                  <div className="text-lg font-semibold text-white/90 capitalize">{language}</div>
+                <div className="text-center p-3 rounded-lg bg-white dark:bg-white/5">
+                  <div className="text-sm text-slate-500 dark:text-white/60 mb-1">语言</div>
+                  <div className="text-lg font-semibold text-slate-900 dark:text-white/90 capitalize">{language}</div>
                 </div>
               </div>
 
@@ -610,8 +610,8 @@ export function StudentOJ() {
               >
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex items-center gap-2">
-                    <Brain className="h-5 w-5 text-cyan-300" />
-                    <span className="font-medium text-white/90">
+                    <Brain className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+                    <span className="font-medium text-slate-900 dark:text-white/90">
                       {showAiAnalysis ? '隐藏AI分析' : '查看AI智能分析'}
                     </span>
                   </div>
@@ -624,7 +624,7 @@ export function StudentOJ() {
                 <div className="p-4 rounded-xl border border-purple-500/30 bg-purple-500/5">
                   <div className="flex items-center gap-2 mb-3">
                     <Cpu className="h-5 w-5 text-purple-300" />
-                    <span className="font-semibold text-white/90">AI学习助手分析</span>
+                    <span className="font-semibold text-slate-900 dark:text-white/90">AI学习助手分析</span>
                   </div>
                   <div className="prose prose-invert max-w-none text-sm">
                     <div className="app-scrollbar max-h-48 overflow-y-auto whitespace-pre-line text-white/75">
@@ -638,8 +638,8 @@ export function StudentOJ() {
             <div className="flex h-[420px] items-center justify-center">
               <div className="text-center">
                 <Terminal className="h-12 w-12 text-white/30 mx-auto mb-4" />
-                <p className="text-white/60">点击“运行代码”按钮测试你的解法</p>
-                <p className="text-sm text-white/40 mt-2">运行结果将显示在这里</p>
+                <p className="text-slate-500 dark:text-white/60">点击“运行代码”按钮测试你的解法</p>
+                <p className="text-sm text-slate-400 dark:text-white/40 mt-2">运行结果将显示在这里</p>
               </div>
             </div>
           )}
