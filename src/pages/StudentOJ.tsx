@@ -329,15 +329,20 @@ export function StudentOJ() {
   }
 
   return (
-    <div className="flex flex-col h-[calc(100vh-80px)] p-4 space-y-4">
+    <div className="space-y-4">
       {/* 顶部：题目列表和工具栏 */}
-      <div className="flex space-x-4">
+      <div className="flex flex-col gap-4 xl:flex-row">
         {/* 题目列表 */}
-        <div className="glass neon-border p-5 w-80 flex-shrink-0">
+        <div
+          className={cn(
+            'glass neon-border shrink-0 p-5 xl:sticky xl:top-28',
+            sidebarCollapsed ? 'xl:w-28' : 'xl:w-80'
+          )}
+        >
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-white/90 flex items-center gap-2">
               <FileCode className="h-5 w-5 text-cyan-300" />
-              题目列表
+              {sidebarCollapsed ? '题库' : '题目列表'}
             </h2>
             <button
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
@@ -348,7 +353,7 @@ export function StudentOJ() {
           </div>
           
           {!sidebarCollapsed && (
-            <div className="space-y-3 overflow-y-auto max-h-60">
+            <div className="app-scrollbar max-h-[360px] space-y-3 overflow-y-auto">
               {mockProblems.map(problem => (
                 <button
                   key={problem.id}
@@ -381,15 +386,28 @@ export function StudentOJ() {
               ))}
             </div>
           )}
+
+          {sidebarCollapsed && (
+            <div className="space-y-3">
+              <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-center">
+                <div className="text-2xl font-bold text-white/90">{mockProblems.length}</div>
+                <div className="mt-1 text-xs text-white/55">当前题库</div>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-center">
+                <div className="text-sm font-semibold text-white/85">{currentProblem.title}</div>
+                <div className="mt-2 text-xs text-white/55">点击箭头展开切换题目</div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* 工具栏和当前题目信息 */}
         <div className="flex-1 glass neon-border p-5">
-          <div className="flex items-center justify-between mb-4">
-            <div>
+          <div className="mb-4 flex flex-col gap-4 2xl:flex-row 2xl:items-start 2xl:justify-between">
+            <div className="min-w-0">
               <h1 className="text-xl font-bold text-white/90 flex items-center gap-3">
                 <Code className="h-6 w-6 text-cyan-300" />
-                {currentProblem.title}
+                <span className="truncate">{currentProblem.title}</span>
                 <span className={cn('chip', getDifficultyColor(currentProblem.difficulty))}>
                   {currentProblem.difficulty}
                 </span>
@@ -398,7 +416,7 @@ export function StudentOJ() {
                 编写代码解决这个问题，点击运行测试你的解法
               </p>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <select 
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
@@ -451,7 +469,7 @@ export function StudentOJ() {
           </div>
 
           {/* 当前题目信息 */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
             <div className="text-center p-3 rounded-lg bg-white/5">
               <div className="text-sm text-white/60">测试用例</div>
               <div className="text-lg font-semibold text-white/90">{currentProblem.testCases.length} 个</div>
@@ -473,11 +491,11 @@ export function StudentOJ() {
       </div>
 
       {/* 中间：题目描述和测试用例 */}
-      <div className="flex space-x-4 flex-1">
+      <div className="grid gap-4 2xl:grid-cols-[minmax(0,1.45fr)_minmax(320px,380px)]">
         {/* 题目描述 */}
-        <div className="glass neon-border p-5 flex-1">
+        <div className="glass neon-border min-h-[340px] p-5">
           <h2 className="text-lg font-semibold text-white/90 mb-4">📖 题目描述</h2>
-          <div className="overflow-y-auto h-[calc(100%-2rem)]">
+          <div className="app-scrollbar max-h-[420px] overflow-y-auto">
             <div className="prose prose-invert max-w-none">
               {formatDescription(currentProblem.description)}
             </div>
@@ -485,9 +503,9 @@ export function StudentOJ() {
         </div>
 
         {/* 测试用例 */}
-        <div className="glass neon-border p-5 w-96 flex-shrink-0">
+        <div className="glass neon-border min-h-[340px] p-5">
           <h2 className="text-lg font-semibold text-white/90 mb-4">🧪 测试用例</h2>
-          <div className="space-y-3 overflow-y-auto h-[calc(100%-2rem)]">
+          <div className="app-scrollbar max-h-[420px] space-y-3 overflow-y-auto">
             {currentProblem.testCases.map((testCase, index) => (
               <div key={index} className="p-3 rounded-lg border border-white/10 bg-white/5">
                 <div className="text-sm font-medium text-white/90 mb-2">用例 {index + 1}</div>
@@ -509,121 +527,123 @@ export function StudentOJ() {
         </div>
       </div>
 
-      {/* 代码编辑器 */}
-      <div className="glass neon-border p-5 flex-1">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-white/90 flex items-center gap-2">
-            <Terminal className="h-5 w-5 text-cyan-300" />
-            代码编辑器
-          </h2>
-          <div className="text-sm text-white/40">
-            {code.length} 字符
+      <div className="grid gap-4 2xl:grid-cols-[minmax(0,1.4fr)_minmax(320px,380px)]">
+        {/* 代码编辑器 */}
+        <div className="glass neon-border p-5">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-white/90 flex items-center gap-2">
+              <Terminal className="h-5 w-5 text-cyan-300" />
+              代码编辑器
+            </h2>
+            <div className="text-sm text-white/40">
+              {code.length} 字符
+            </div>
+          </div>
+          <div className="relative min-h-[420px]">
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5" />
+            <textarea
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              className="relative h-[420px] w-full resize-y rounded-xl border border-white/10 bg-black/30 p-4 font-mono text-sm text-white/90 focus:outline-none focus:border-cyan-500/50"
+              spellCheck="false"
+            />
           </div>
         </div>
-        <div className="relative h-[calc(100%-3rem)] min-h-[300px]">
-          <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5" />
-          <textarea
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-            className="relative w-full h-full font-mono text-sm bg-black/30 border border-white/10 rounded-xl p-4 text-white/90 resize-none focus:outline-none focus:border-cyan-500/50"
-            spellCheck="false"
-          />
-        </div>
-      </div>
 
-      {/* 运行结果 */}
-      <div className="glass neon-border p-5">
-        <h2 className="text-lg font-semibold text-white/90 mb-4">📊 运行结果</h2>
+        {/* 运行结果 */}
+        <div className="glass neon-border p-5 2xl:sticky 2xl:top-28">
+          <h2 className="text-lg font-semibold text-white/90 mb-4">📊 运行结果</h2>
         
-        {submissionResult ? (
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  {submissionResult.status === 'Accepted' ? (
-                    <CheckCircle className="h-8 w-8 text-green-400" />
-                  ) : (
-                    <span className="text-red-400 text-2xl">✗</span>
-                  )}
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-white/90">
-                    {submissionResult.status}
-                  </h3>
-                  <p className="text-sm text-white/60">{submissionResult.message}</p>
-                </div>
-              </div>
-              <div className="text-right">
-                <div className="text-2xl font-bold text-white/90">
-                  {submissionResult.passedTests}/{submissionResult.totalTests}
-                </div>
-                <div className="text-sm text-white/60">测试用例通过</div>
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-4 gap-4">
-              <div className="text-center p-3 rounded-lg bg-white/5">
-                <div className="text-sm text-white/60 mb-1">运行时间</div>
-                <div className="text-lg font-semibold text-white/90 truncate" title={submissionResult.runtime}>
-                  {submissionResult.runtime}
-                </div>
-              </div>
-              <div className="text-center p-3 rounded-lg bg-white/5">
-                <div className="text-sm text-white/60 mb-1">内存使用</div>
-                <div className="text-lg font-semibold text-white/90 truncate" title={submissionResult.memory}>
-                  {submissionResult.memory}
-                </div>
-              </div>
-              <div className="text-center p-3 rounded-lg bg-white/5">
-                <div className="text-sm text-white/60 mb-1">代码长度</div>
-                <div className="text-lg font-semibold text-white/90">{code.length} 字符</div>
-              </div>
-              <div className="text-center p-3 rounded-lg bg-white/5">
-                <div className="text-sm text-white/60 mb-1">语言</div>
-                <div className="text-lg font-semibold text-white/90 capitalize">{language}</div>
-              </div>
-            </div>
-
-            {/* AI分析按钮 */}
-            <button
-              onClick={() => setShowAiAnalysis(!showAiAnalysis)}
-              className="w-full p-3 rounded-xl border border-cyan-500/30 bg-cyan-500/5 hover:bg-cyan-500/10 transition-colors"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Brain className="h-5 w-5 text-cyan-300" />
-                  <span className="font-medium text-white/90">
-                    {showAiAnalysis ? '隐藏AI分析' : '查看AI智能分析'}
-                  </span>
-                </div>
-                <span className="chip">个性化反馈</span>
-              </div>
-            </button>
-
-            {/* AI分析内容 */}
-            {showAiAnalysis && aiFeedback && (
-              <div className="p-4 rounded-xl border border-purple-500/30 bg-purple-500/5">
-                <div className="flex items-center gap-2 mb-3">
-                  <Cpu className="h-5 w-5 text-purple-300" />
-                  <span className="font-semibold text-white/90">AI学习助手分析</span>
-                </div>
-                <div className="prose prose-invert max-w-none text-sm">
-                  <div className="whitespace-pre-line text-white/75 overflow-y-auto max-h-40">
-                    {aiFeedback}
+          {submissionResult ? (
+            <div className="space-y-4">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    {submissionResult.status === 'Accepted' ? (
+                      <CheckCircle className="h-8 w-8 text-green-400" />
+                    ) : (
+                      <span className="text-red-400 text-2xl">✗</span>
+                    )}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-white/90">
+                      {submissionResult.status}
+                    </h3>
+                    <p className="text-sm text-white/60">{submissionResult.message}</p>
                   </div>
                 </div>
+                <div className="text-right">
+                  <div className="text-2xl font-bold text-white/90">
+                    {submissionResult.passedTests}/{submissionResult.totalTests}
+                  </div>
+                  <div className="text-sm text-white/60">测试用例通过</div>
+                </div>
               </div>
-            )}
-          </div>
-        ) : (
-          <div className="h-32 flex items-center justify-center">
-            <div className="text-center">
-              <Terminal className="h-12 w-12 text-white/30 mx-auto mb-4" />
-              <p className="text-white/60">点击"运行代码"按钮测试你的解法</p>
-              <p className="text-sm text-white/40 mt-2">运行结果将显示在这里</p>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="text-center p-3 rounded-lg bg-white/5">
+                  <div className="text-sm text-white/60 mb-1">运行时间</div>
+                  <div className="text-lg font-semibold text-white/90 truncate" title={submissionResult.runtime}>
+                    {submissionResult.runtime}
+                  </div>
+                </div>
+                <div className="text-center p-3 rounded-lg bg-white/5">
+                  <div className="text-sm text-white/60 mb-1">内存使用</div>
+                  <div className="text-lg font-semibold text-white/90 truncate" title={submissionResult.memory}>
+                    {submissionResult.memory}
+                  </div>
+                </div>
+                <div className="text-center p-3 rounded-lg bg-white/5">
+                  <div className="text-sm text-white/60 mb-1">代码长度</div>
+                  <div className="text-lg font-semibold text-white/90">{code.length} 字符</div>
+                </div>
+                <div className="text-center p-3 rounded-lg bg-white/5">
+                  <div className="text-sm text-white/60 mb-1">语言</div>
+                  <div className="text-lg font-semibold text-white/90 capitalize">{language}</div>
+                </div>
+              </div>
+
+              {/* AI分析按钮 */}
+              <button
+                onClick={() => setShowAiAnalysis(!showAiAnalysis)}
+                className="w-full p-3 rounded-xl border border-cyan-500/30 bg-cyan-500/5 hover:bg-cyan-500/10 transition-colors"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2">
+                    <Brain className="h-5 w-5 text-cyan-300" />
+                    <span className="font-medium text-white/90">
+                      {showAiAnalysis ? '隐藏AI分析' : '查看AI智能分析'}
+                    </span>
+                  </div>
+                  <span className="chip">个性化反馈</span>
+                </div>
+              </button>
+
+              {/* AI分析内容 */}
+              {showAiAnalysis && aiFeedback && (
+                <div className="p-4 rounded-xl border border-purple-500/30 bg-purple-500/5">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Cpu className="h-5 w-5 text-purple-300" />
+                    <span className="font-semibold text-white/90">AI学习助手分析</span>
+                  </div>
+                  <div className="prose prose-invert max-w-none text-sm">
+                    <div className="app-scrollbar max-h-48 overflow-y-auto whitespace-pre-line text-white/75">
+                      {aiFeedback}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
-        )}
+          ) : (
+            <div className="flex h-[420px] items-center justify-center">
+              <div className="text-center">
+                <Terminal className="h-12 w-12 text-white/30 mx-auto mb-4" />
+                <p className="text-white/60">点击“运行代码”按钮测试你的解法</p>
+                <p className="text-sm text-white/40 mt-2">运行结果将显示在这里</p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )

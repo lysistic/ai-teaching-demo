@@ -460,8 +460,8 @@ export function StudentQA() {
   )
 
   return (
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-      <div className="glass neon-border flex min-h-[960px] flex-col lg:col-span-8">
+    <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-12 flex-1 min-h-0">
+      <div className="glass neon-border flex h-full flex-col lg:col-span-8">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 px-6 py-5">
           <div className="flex items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
@@ -475,13 +475,13 @@ export function StudentQA() {
 
           <div className="flex items-center gap-3">
             <span className="text-sm font-semibold text-white/80">场景：</span>
-            <div className="flex flex-wrap rounded-xl border border-white/10 bg-white/5 p-1">
+            <div className="flex max-w-full flex-nowrap gap-1 overflow-x-auto rounded-xl border border-white/10 bg-white/5 p-1 app-scrollbar">
               {(['课前预习', '课堂讲解', '课后巩固', '实验验证'] as const).map((s) => (
                 <button
                   key={s}
                   onClick={() => setScenario(s)}
                   className={cn(
-                    'rounded-lg px-3 py-1.5 text-sm font-semibold transition whitespace-nowrap',
+                    'shrink-0 rounded-lg px-3 py-1.5 text-sm font-semibold transition whitespace-nowrap',
                     scenario === s ? 'bg-white/10 text-white' : 'text-white/60 hover:text-white/85'
                   )}
                 >
@@ -505,13 +505,13 @@ export function StudentQA() {
           </div>
         </div>
 
-        <div className="grid gap-5 px-6 py-5 md:grid-cols-2">
+        <div className="grid gap-4 px-6 py-5 md:grid-cols-2">
           {optionCards.map((o) => (
             <button
               key={o.k}
               onClick={() => setChoice(o.k)}
               className={cn(
-                'group min-h-[150px] rounded-2xl border border-white/10 bg-white/5 p-5 text-left transition hover:bg-white/10',
+                'group rounded-2xl border border-white/10 bg-white/5 p-5 text-left transition hover:bg-white/10 md:min-h-[138px]',
                 choice === o.k ? 'neon-border' : ''
               )}
             >
@@ -552,8 +552,11 @@ export function StudentQA() {
           </button>
         </div>
 
-        <div className="flex-1 min-h-0">
-          <div ref={scrollRef} className="h-full overflow-auto px-6 pb-6 pt-5">
+        <div className="min-h-[420px] flex-1">
+          <div
+            ref={scrollRef}
+            className="app-scrollbar h-full max-h-[680px] overflow-auto px-6 pb-6 pt-5 lg:max-h-[760px]"
+          >
             <div className="space-y-4">
               {chat.map((m) => (
                 <div

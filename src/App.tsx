@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { TeacherLab } from './pages/TeacherLab'
 import { TeacherAnalytics } from './pages/TeacherAnalytics'
 import { TeacherSubmissions } from './pages/TeacherSubmissions'
+import { StudentHome } from './pages/StudentHome'
 import { StudentQA } from './pages/StudentQA'
 import { StudentOJ } from './pages/StudentOJ'
 import { Courseware } from './pages/Courseware'
@@ -14,7 +15,8 @@ function App() {
     <Routes>
       <Route element={<AppLayout />}>
         <Route path="/" element={<Navigate to="/student" replace />} />
-        <Route path="/student" element={<StudentQA />} />
+        <Route path="/student" element={<StudentHome />} />
+        <Route path="/student/qa" element={<StudentQA />} />
         <Route path="/student/oj" element={<StudentOJ />} />
         <Route path="/discussion" element={<Discussion />} />
         <Route path="/courseware" element={<Courseware />} />

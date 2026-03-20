@@ -17,8 +17,13 @@
     height: 100%;
   }
 
+  #root {
+    min-height: 100%;
+  }
+
   body {
     margin: 0;
+    min-width: 320px;
     background: radial-gradient(1200px 800px at 20% 15%, rgba(68, 255, 216, 0.16), transparent 55%),
       radial-gradient(1000px 700px at 80% 30%, rgba(120, 110, 255, 0.18), transparent 50%),
       radial-gradient(900px 650px at 45% 90%, rgba(255, 62, 166, 0.12), transparent 55%),
@@ -131,5 +136,26 @@
 
   html[data-theme='light'] [class*='border-white'] {
     border-color: rgb(203 213 225 / 0.9) !important;
+  }
+
+  .app-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(148, 163, 184, 0.45) transparent;
+  }
+
+  .app-scrollbar::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .app-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .app-scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    background-color: rgba(148, 163, 184, 0.35);
   }
 }

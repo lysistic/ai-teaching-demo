@@ -20,9 +20,13 @@ import {
   Crown,
   RefreshCw,
   Zap,
-  Volume2
+  Volume2,
+  ImagePlus,
+  X,
+  Globe
 } from 'lucide-react'
 import { cn } from '../lib/cn'
+import { askTeachingAssistant, chatWithCodex } from '../lib/openaiChat'
 
 // 模拟讨论帖子数据
 const mockPosts = [
@@ -137,15 +141,68 @@ const activeUsers = [
   { id: 5, name: '张子墨', avatar: 'ZZ', posts: 8, replies: 19, isOnline: true }
 ]
 
+type AiRole = {
+  id: string
+  label: string
+  summary: string
+  instruction: string
+}
+
+const aiRolePresets: AiRole[] = [
+  {
+    id: 'algo-teacher',
+    label: '算法教师',
+    summary: '强调知识点讲解与步骤拆解',
+    instruction: '你是算法教师，先讲概念，再给步骤化解题路径，最后给一条课堂迁移练习建议。',
+  },
+  {
+    id: 'scenario-dialog',
+    label: '情境对话',
+    summary: '按真实场景对话引导思考',
+    instruction: '你以真实课堂或行业场景发问与追问，帮助学生澄清思路并做选择理由说明。',
+  },
+  {
+    id: 'competitor-economy',
+    label: '竞争对手【经济】',
+    summary: '从成本与效率角度质疑方案',
+    instruction: '你扮演强调经济性的竞争对手，关注时间、资源、成本，指出低性价比点并给改进建议。',
+  },
+  {
+    id: 'competitor-innovation',
+    label: '竞争对手【创新】',
+    summary: '从创新性与突破角度挑战方案',
+    instruction: '你扮演强调创新性的竞争对手，挑战方案同质化问题，给出更有创造力的替代方向。',
+  },
+]
+
 export function Discussion() {
   const [posts, setPosts] = useState(mockPosts)
   const [newPost, setNewPost] = useState('')
   const [selectedPost, setSelectedPost] = useState<number | null>(null)
   const [aiAssistantActive, setAiAssistantActive] = useState(true)
   const [aiThinking, setAiThinking] = useState(false)
+  const [aiError, setAiError] = useState<string | null>(null)
+  const [rolePanelOpen, setRolePanelOpen] = useState(false)
+  const [selectedAiRoleId, setSelectedAiRoleId] = useState<string>('algo-teacher')
+  const [chatInput, setChatInput] = useState('')
+  const [chatImage, setChatImage] = useState<{ dataUrl: string; name: string } | null>(null)
+  const [chatSending, setChatSending] = useState(false)
+  const [enableWebSearch, setEnableWebSearch] = useState(true)
+  const [assistantChat, setAssistantChat] = useState<
+    Array<{ role: 'user' | 'assistant'; text: string; ts: number; imageDataUrl?: string }>
+  >([
+    {
+      role: 'assistant',
+      text: '你好，我是Algo智能体。你可以输入文字，或上传一张图片并提问；也可以开启 Web Search 做联网检索。',
+      ts: Date.now(),
+    },
+  ])
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
   const [filterTag, setFilterTag] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
   const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const selectedAiRole =
+    aiRolePresets.find((role) => role.id === selectedAiRoleId) ?? aiRolePresets[0]
 
   // 自动调整文本框高度
   useEffect(() => {
@@ -155,9 +212,101 @@ export function Discussion() {
     }
   }, [newPost])
 
+  const buildPrompt = (content: string) => {
+    return [`
+请以“算法课程AI助教”的身份回答下面讨论内容。
+当前角色设定：${selectedAiRole.label}（${selectedAiRole.summary}）
+角色指令：${selectedAiRole.instruction}
+
+请使用中文且结构化输出：
+1) 核心要点（3条内）
+2) 解题思路（步骤化）
+3) 学习建议（可执行）
+
+讨论内容：${content}
+    `.trim()]
+      .join('\n')
+  }
+
+  const handleImageSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    if (!file.type.startsWith('image/')) {
+      setAiError('仅支持图片文件上传')
+      return
+    }
+
+    const reader = new FileReader()
+    reader.onload = () => {
+      const result = typeof reader.result === 'string' ? reader.result : ''
+      if (!result) {
+        setAiError('图片读取失败')
+        return
+      }
+      setAiError(null)
+      setChatImage({ dataUrl: result, name: file.name })
+    }
+    reader.onerror = () => setAiError('图片读取失败')
+    reader.readAsDataURL(file)
+
+    event.target.value = ''
+  }
+
+  const handleCodexChatSend = async () => {
+    const content = chatInput.trim()
+    if (!content && !chatImage) return
+
+    setAiError(null)
+    setChatSending(true)
+
+    const userMessage = {
+      role: 'user' as const,
+      text: content || '请结合图片进行分析。',
+      ts: Date.now(),
+      imageDataUrl: chatImage?.dataUrl,
+    }
+
+    setAssistantChat((prev) => [...prev, userMessage])
+    setChatInput('')
+    setChatImage(null)
+
+    const recentMessages = [...assistantChat, userMessage].slice(-10)
+    try {
+      const answer = await chatWithCodex({
+        systemInstruction: `你是教学创新平台中的AI智能体。当前角色：${selectedAiRole.label}。角色指令：${selectedAiRole.instruction}。请使用中文回答，格式清晰，内容务实。`,
+        messages: recentMessages.map((message) => ({
+          role: message.role,
+          text: message.text,
+          imageDataUrl: message.imageDataUrl,
+        })),
+        useWebSearch: enableWebSearch,
+      })
+
+      setAssistantChat((prev) => [
+        ...prev,
+        { role: 'assistant', text: answer, ts: Date.now() + 1 },
+      ])
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : '对话调用失败'
+      setAiError(msg)
+      setAssistantChat((prev) => [
+        ...prev,
+        {
+          role: 'assistant',
+          text: `调用失败：${msg}`,
+          ts: Date.now() + 1,
+        },
+      ])
+    } finally {
+      setChatSending(false)
+    }
+  }
+
   // 发布新帖子
-  const handlePost = () => {
-    if (!newPost.trim()) return
+  const handlePost = async () => {
+    const content = newPost.trim()
+    if (!content) return
 
     const newPostObj = {
       id: posts.length + 1,
@@ -165,7 +314,7 @@ export function Discussion() {
       avatar: 'ME',
       role: '学生',
       time: '刚刚',
-      content: newPost,
+      content,
       likes: 0,
       replies: 0,
       tags: ['新话题'],
@@ -177,24 +326,23 @@ export function Discussion() {
 
     setPosts([newPostObj, ...posts])
     setNewPost('')
+    setAiError(null)
     
     // 如果有AI助教，自动生成回复
     if (aiAssistantActive) {
-      setTimeout(() => {
-        const aiReply = {
-          id: posts.length + 1000,
-          postId: newPostObj.id,
-          author: 'AI助教',
-          avatar: 'AI',
-          role: 'AI助教',
-          time: '刚刚',
-          content: '感谢分享！这是一个很好的问题。作为AI助教，我可以帮你分析这个问题。从你的描述来看，这涉及到算法设计的关键概念。建议先明确问题的约束条件，然后选择合适的算法范式。',
-          likes: 0,
-          isLiked: false
-        }
-        // 在实际应用中，这里会调用AI API生成回复
-        console.log('AI助教回复:', aiReply)
-      }, 2000)
+      setSelectedPost(newPostObj.id)
+      setAiThinking(true)
+      try {
+        const aiResponse = await askTeachingAssistant(buildPrompt(content))
+        setPosts((prev) =>
+          prev.map((post) => (post.id === newPostObj.id ? { ...post, aiResponse } : post))
+        )
+      } catch (error) {
+        const msg = error instanceof Error ? error.message : '调用AI助教失败'
+        setAiError(msg)
+      } finally {
+        setAiThinking(false)
+      }
     }
   }
 
@@ -217,39 +365,23 @@ export function Discussion() {
   }
 
   // 咨询AI助教
-  const handleAskAI = (postId: number) => {
+  const handleAskAI = async (postId: number) => {
+    const post = posts.find((p) => p.id === postId)
+    if (!post) return
+
+    setAiError(null)
     setAiThinking(true)
     setSelectedPost(postId)
-    
-    // 模拟AI思考过程
-    setTimeout(() => {
-      const post = posts.find(p => p.id === postId)
-      if (post && !post.aiResponse) {
-        // 生成AI回复
-        const aiResponse = `作为AI助教，我对"${post.content.substring(0, 50)}..."的分析如下：
 
-💡 **核心要点：**
-1. 这个问题涉及到算法设计的关键概念
-2. 需要从多个角度考虑解决方案
-3. 建议先理解问题本质，再选择合适算法
-
-🔍 **解题思路：**
-- 分析问题约束条件
-- 确定算法复杂度要求
-- 选择合适的算法范式
-- 编写代码并测试
-
-📚 **学习建议：**
-建议参考相关教材和在线资源，加深理解。`
-
-        setPosts(posts.map(p => 
-          p.id === postId 
-            ? { ...p, aiResponse }
-            : p
-        ))
-      }
+    try {
+      const aiResponse = await askTeachingAssistant(buildPrompt(post.content))
+      setPosts((prev) => prev.map((p) => (p.id === postId ? { ...p, aiResponse } : p)))
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : '调用AI助教失败'
+      setAiError(msg)
+    } finally {
       setAiThinking(false)
-    }, 1500)
+    }
   }
 
   // 过滤帖子
@@ -343,6 +475,12 @@ export function Discussion() {
           </div>
         </div>
       </div>
+
+      {aiError && (
+        <div className="rounded-xl border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
+          AI助教调用失败：{aiError}
+        </div>
+      )}
 
       {/* 主内容区 */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -458,30 +596,174 @@ export function Discussion() {
 
           {/* AI助教功能 */}
           <div className="glass neon-border p-5">
-            <h2 className="text-lg font-semibold text-white/90 mb-4 flex items-center gap-2">
-              <Brain className="h-5 w-5 text-purple-300" />
-              AI助教功能
-            </h2>
+            <div className="mb-4 flex items-center justify-between gap-2">
+              <h2 className="text-lg font-semibold text-white/90 flex items-center gap-2">
+                <Brain className="h-5 w-5 text-purple-300" />
+                AI助教功能
+              </h2>
+              <button
+                onClick={() => setRolePanelOpen((prev) => !prev)}
+                className={cn(
+                  'btn px-3 py-1.5 text-xs',
+                  rolePanelOpen ? 'bg-purple-500/20 border-purple-500/35' : 'bg-white/5 hover:bg-white/10'
+                )}
+              >
+                角色设定
+              </button>
+            </div>
+
+            <div className="mb-4 rounded-xl border border-purple-500/30 bg-purple-500/10 px-3 py-2">
+              <div className="text-xs text-white/60">当前角色</div>
+              <div className="mt-0.5 text-sm font-semibold text-white/90">{selectedAiRole.label}</div>
+              <div className="text-xs text-white/65">{selectedAiRole.summary}</div>
+            </div>
+
+            {rolePanelOpen && (
+              <div className="mb-4 space-y-2">
+                {aiRolePresets.map((role) => (
+                  <button
+                    key={role.id}
+                    onClick={() => {
+                      setSelectedAiRoleId(role.id)
+                      setRolePanelOpen(false)
+                    }}
+                    className={cn(
+                      'w-full rounded-lg border px-3 py-2 text-left transition',
+                      selectedAiRoleId === role.id
+                        ? 'border-cyan-500/40 bg-cyan-500/15'
+                        : 'border-white/10 bg-white/5 hover:bg-white/10'
+                    )}
+                  >
+                    <div className="text-sm font-semibold text-white/90">{role.label}</div>
+                    <div className="mt-0.5 text-xs text-white/60">{role.summary}</div>
+                  </button>
+                ))}
+              </div>
+            )}
+
             <div className="space-y-3">
+              <div className="rounded-xl border border-white/10 bg-black/20 p-3">
+                <div className="mb-3 flex items-center justify-between gap-2">
+                  <div className="text-sm font-semibold text-white/90">Algo智能体对话框</div>
+                  <button
+                    onClick={() => setEnableWebSearch((prev) => !prev)}
+                    className={cn(
+                      'btn px-2.5 py-1 text-xs',
+                      enableWebSearch
+                        ? 'bg-cyan-500/20 border-cyan-500/35 text-cyan-200'
+                        : 'bg-white/5 border-white/10'
+                    )}
+                  >
+                    <Globe className="h-3.5 w-3.5" />
+                    Web Search
+                  </button>
+                </div>
+
+                <div className="max-h-52 space-y-2 overflow-auto rounded-lg border border-white/10 bg-white/5 p-2">
+                  {assistantChat.map((msg) => (
+                    <div
+                      key={msg.ts}
+                      className={cn(
+                        'rounded-lg px-3 py-2 text-xs leading-relaxed',
+                        msg.role === 'assistant'
+                          ? 'border border-cyan-500/20 bg-cyan-500/10 text-white/85'
+                          : 'border border-white/10 bg-black/25 text-white/90'
+                      )}
+                    >
+                      {msg.imageDataUrl && (
+                        <img
+                          src={msg.imageDataUrl}
+                          alt="upload"
+                          className="mb-2 max-h-28 rounded-md border border-white/10"
+                        />
+                      )}
+                      <div className="whitespace-pre-wrap">{msg.text}</div>
+                    </div>
+                  ))}
+                </div>
+
+                {chatImage && (
+                  <div className="mt-2 rounded-lg border border-white/10 bg-white/5 p-2">
+                    <div className="mb-1 flex items-center justify-between text-xs text-white/65">
+                      <span>{chatImage.name}</span>
+                      <button
+                        onClick={() => setChatImage(null)}
+                        className="rounded p-0.5 hover:bg-white/10"
+                      >
+                        <X className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+                    <img src={chatImage.dataUrl} alt={chatImage.name} className="max-h-24 rounded-md" />
+                  </div>
+                )}
+
+                <textarea
+                  value={chatInput}
+                  onChange={(event) => setChatInput(event.target.value)}
+                  placeholder="输入问题，支持文本 + 图片..."
+                  className="mt-2 min-h-[72px] w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/90 placeholder-white/45 focus:outline-none focus:border-cyan-500/40"
+                />
+
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageSelect}
+                  className="hidden"
+                />
+
+                <div className="mt-2 flex items-center justify-between gap-2">
+                  <button
+                    onClick={() => fileInputRef.current?.click()}
+                    className="btn px-3 py-1.5 text-xs"
+                  >
+                    <ImagePlus className="h-3.5 w-3.5" />
+                    图片
+                  </button>
+                  <button
+                    onClick={handleCodexChatSend}
+                    disabled={chatSending || (!chatInput.trim() && !chatImage)}
+                    className={cn(
+                      'btn px-3 py-1.5 text-xs',
+                      chatSending
+                        ? 'bg-purple-500/20 border-purple-500/35'
+                        : 'btn-primary neon-border'
+                    )}
+                  >
+                    {chatSending ? (
+                      <>
+                        <RefreshCw className="h-3.5 w-3.5 animate-spin" />
+                        发送中
+                      </>
+                    ) : (
+                      <>
+                        <Send className="h-3.5 w-3.5" />
+                        发送
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+
               <button className="w-full flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
                 <Lightbulb className="h-5 w-5 text-yellow-400" />
                 <div className="text-left">
                   <div className="font-medium text-white/90">智能答疑</div>
-                  <div className="text-xs text-white/60">24小时在线解答</div>
+                  <div className="text-xs text-white/60">支持文本+图片多模态提问</div>
                 </div>
               </button>
               <button className="w-full flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
                 <Zap className="h-5 w-5 text-cyan-400" />
                 <div className="text-left">
-                  <div className="font-medium text-white/90">学习建议</div>
-                  <div className="text-xs text-white/60">个性化学习路径</div>
+                  <div className="font-medium text-white/90">联网检索</div>
+                  <div className="text-xs text-white/60">可切换 Web Search 能力</div>
                 </div>
               </button>
               <button className="w-full flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
                 <Volume2 className="h-5 w-5 text-green-400" />
                 <div className="text-left">
-                  <div className="font-medium text-white/90">语音交流</div>
-                  <div className="text-xs text-white/60">支持语音提问</div>
+                  <div className="font-medium text-white/90">角色协同</div>
+                  <div className="text-xs text-white/60">结合角色设定输出差异化回答</div>
                 </div>
               </button>
             </div>
