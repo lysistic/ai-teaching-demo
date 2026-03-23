@@ -1,3 +1,4 @@
+import { cn } from '../lib/cn'
 import { Outlet, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import {
   Bot,
@@ -13,10 +14,9 @@ import {
   Sun,
   Moon,
   Menu,
-  X,
+  
   type LucideIcon,
 } from 'lucide-react'
-import { cn } from '../lib/cn'
 import { useState, useEffect } from 'react'
 
 type NavItem = {
@@ -29,6 +29,7 @@ type NavItem = {
 const NAV_BY_ROLE: Record<'student' | 'teacher', NavItem[]> = {
   student: [
     { label: '学习首页', to: '/student', icon: Home, end: true },
+    { label: '知识图谱', to: '/student/knowledge-graph', icon: Database },
     { label: 'AI互动引导', to: '/student/qa', icon: Bot },
     { label: '编程练习', to: '/student/oj', icon: Code },
     { label: '课件资源', to: '/courseware', icon: BookOpen },

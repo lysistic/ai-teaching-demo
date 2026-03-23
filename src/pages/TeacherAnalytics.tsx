@@ -419,15 +419,15 @@ export function TeacherAnalytics() {
           </div>
         </div>
 
-        <div className="glass transition-all hover:border-indigo-500/30 neon-border p-6">
+        <div className="glass transition-all hover:border-indigo-500/30 neon-border p-6 mb-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5">
                 <Users className="h-6 w-6 text-fuchsia-200" />
               </div>
               <div>
-                <div className="text-lg font-semibold text-slate-900 dark:text-white/90">学生答题详情</div>
-                <div className="text-base text-slate-500 dark:text-white/60">增加课前/课后数据后的完整学情视图</div>
+                <div className="text-lg font-semibold text-slate-900 dark:text-white/90">课前&课堂表现</div>
+                <div className="text-base text-slate-500 dark:text-white/60">学生预习诊断与课堂作答视图</div>
               </div>
             </div>
           </div>
@@ -437,22 +437,24 @@ export function TeacherAnalytics() {
               <thead className="bg-slate-100 dark:bg-white/5 text-base text-slate-700 dark:text-white/70">
                 <tr>
                   <th className="rounded-l-xl px-5 py-4">学生</th>
-                  <th className="px-5 py-4">选择</th>
-                  <th className="px-5 py-4">课堂结果</th>
                   <th className="px-5 py-4">课前诊断</th>
-                  <th className="px-5 py-4">课后掌握</th>
-                  <th className="px-5 py-4">成长值</th>
-                  <th className="rounded-r-xl px-5 py-4">综合状态</th>
+                  <th className="px-5 py-4">预习状态</th>
+                  <th className="px-5 py-4">课堂选择</th>
+                  <th className="rounded-r-xl px-5 py-4">课堂结果</th>
                 </tr>
               </thead>
               <tbody>
                 {enrichedStudents.map((student) => (
-                  <tr key={student.id} className="border-t border-slate-200 dark:border-white/10">
+                  <tr key={`pre-${student.id}`} className="border-t border-slate-200 dark:border-white/10">
                     <td className="px-5 py-4 text-lg font-medium text-white/85">
                       <div>
                         <div>{student.name}</div>
                         <div className="mt-1 text-xs text-slate-500 dark:text-white/50">{student.className}</div>
                       </div>
+                    </td>
+                    <td className="px-5 py-4 text-white/75">{student.preScore} 分</td>
+                    <td className="px-5 py-4 text-slate-500 dark:text-white/50">
+                      {student.preCompleted ? '已预习' : '待补预习'}
                     </td>
                     <td className="px-5 py-4">
                       <span
@@ -477,17 +479,49 @@ export function TeacherAnalytics() {
                         </span>
                       )}
                     </td>
-                    <td className="px-5 py-4 text-white/75">
-                      <div>{student.preScore} 分</div>
-                      <div className="mt-1 text-xs text-slate-500 dark:text-white/50">
-                        {student.preCompleted ? '已预习' : '待补预习'}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="glass transition-all hover:border-indigo-500/30 neon-border p-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5">
+                <Target className="h-6 w-6 text-fuchsia-200" />
+              </div>
+              <div>
+                <div className="text-lg font-semibold text-slate-900 dark:text-white/90">课后追踪与成效</div>
+                <div className="text-base text-slate-500 dark:text-white/60">学生课后复盘与成长情况</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-5 overflow-x-auto">
+            <table className="w-full text-left text-base">
+              <thead className="bg-slate-100 dark:bg-white/5 text-base text-slate-700 dark:text-white/70">
+                <tr>
+                  <th className="rounded-l-xl px-5 py-4">学生</th>
+                  <th className="px-5 py-4">课后掌握</th>
+                  <th className="px-5 py-4">课后状态</th>
+                  <th className="px-5 py-4">成长值</th>
+                  <th className="rounded-r-xl px-5 py-4">综合状态</th>
+                </tr>
+              </thead>
+              <tbody>
+                {enrichedStudents.map((student) => (
+                  <tr key={`post-${student.id}`} className="border-t border-slate-200 dark:border-white/10">
+                    <td className="px-5 py-4 text-lg font-medium text-white/85">
+                      <div>
+                        <div>{student.name}</div>
+                        <div className="mt-1 text-xs text-slate-500 dark:text-white/50">{student.className}</div>
                       </div>
                     </td>
-                    <td className="px-5 py-4 text-white/75">
-                      <div>{student.postWeightedScore} 分</div>
-                      <div className="mt-1 text-xs text-slate-500 dark:text-white/50">
-                        {student.postCompleted ? '已复盘' : '待补复盘'}
-                      </div>
+                    <td className="px-5 py-4 text-white/75">{student.postWeightedScore} 分</td>
+                    <td className="px-5 py-4 text-slate-500 dark:text-white/50">
+                      {student.postCompleted ? '已复盘' : '待补复盘'}
                     </td>
                     <td className="px-5 py-4 text-white/75">+{student.growth}</td>
                     <td className="px-5 py-4">

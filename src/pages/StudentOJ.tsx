@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
-import { Brain, Code, Cpu, Terminal, CheckCircle, FileCode, Play, RefreshCw, Save, ChevronRight, ChevronLeft } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { Code, Cpu, Terminal, CheckCircle, FileCode, Play, RefreshCw, Save, ChevronRight, ChevronLeft, Sparkles } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '../lib/cn'
 
 // 模拟编程题目数据
@@ -221,6 +222,8 @@ export function StudentOJ() {
   const [showAiAnalysis, setShowAiAnalysis] = useState(false)
   const [aiFeedback, setAiFeedback] = useState<string>('')
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [askingCopilot, setAskingCopilot] = useState(false)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   // 当切换题目时重置代码
   useEffect(() => {
@@ -228,6 +231,18 @@ export function StudentOJ() {
     setSubmissionResult(null)
     setShowAiAnalysis(false)
   }, [currentProblem])
+
+  // 模拟呼叫Copilot
+  const handleAskCopilot = () => {
+    setAskingCopilot(true)
+    setTimeout(() => {
+      setAskingCopilot(false)
+      setAiFeedback(`🌟 **AI 代码提示：**
+
+这里可以考虑使用额外的数据结构来降低时间复杂度。比如，你可以使用 \`Map\` 来保存这几个状态...`)
+      setShowAiAnalysis(true)
+    }, 1500)
+  }
 
   // 模拟运行代码
   const handleRunCode = () => {
@@ -463,19 +478,42 @@ export function StudentOJ() {
           </div>
 
           {/* 编辑器本体 */}
-          <div className="glass flex-1 flex flex-col p-0 min-h-0 overflow-hidden relative group">
-            <div className="flex items-center justify-between px-4 py-3 shrink-0 border-b border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/[0.02]">
+          <div className="glass flex-1 flex flex-col p-0 min-h-0 overflow-hidden relative group border border-slate-200/50 dark:border-white/10 shadow-inner bg-slate-50/50 dark:bg-[#0d1117]">
+            <div className="flex items-center justify-between px-4 py-2.5 shrink-0 border-b border-slate-200 dark:border-white/10 bg-slate-100/50 dark:bg-black/20">
               <h2 className="text-sm font-semibold text-slate-700 dark:text-white/80 flex items-center gap-2">
                 <Terminal className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
-                编辑器
+                代码编辑器
               </h2>
+              <button 
+                 onClick={handleAskCopilot}
+                 disabled={askingCopilot}
+                 className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white shadow-md hover:shadow-lg transition-all hover:scale-105 active:scale-95 disabled:opacity-70"
+              >
+                 {askingCopilot ? <RefreshCw className="h-3 w-3 animate-spin" /> : <Sparkles className="h-3 w-3" />}
+                 AI 提示
+              </button>
             </div>
-            <textarea
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              className="flex-1 w-full resize-none p-4 font-mono text-sm leading-relaxed text-slate-800 dark:text-white/90 bg-transparent outline-none app-scrollbar"
-              spellCheck="false"
-            />
+            
+            <div className="flex-1 flex overflow-hidden relative">
+               {/* 行号区 */}
+               <div className="w-12 shrink-0 bg-slate-100/50 dark:bg-black/20 border-r border-slate-200/50 dark:border-white/5 py-4 flex flex-col items-end pr-3 select-none overflow-hidden font-mono text-[13px] leading-relaxed text-slate-400 dark:text-slate-600">
+                  {Array.from({ length: Math.max(code.split('\n').length, 20) }).map((_, i) => (
+                    <div key={i} className="min-h-[1.5rem]">{i + 1}</div>
+                  ))}
+               </div>
+               
+               <textarea
+                 ref={textareaRef}
+                 value={code}
+                 onChange={(e) => setCode(e.target.value)}
+                 className="flex-1 w-full resize-none p-4 font-mono text-[13px] leading-relaxed text-slate-800 dark:text-slate-300 bg-transparent outline-none app-scrollbar whitespace-pre"
+                 spellCheck="false"
+                 style={{ tabSize: 4 }}
+               />
+               
+               {/* 代码全息背景光效 */}
+               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-indigo-500/5 dark:bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+            </div>
           </div>
 
           {/* 运行区面板（终端风格） */}
@@ -537,22 +575,44 @@ export function StudentOJ() {
         </div>
       </div>
 
-      {showAiAnalysis && aiFeedback && (
-        <div className="fixed bottom-8 right-8 w-96 glass bg-slate-900/95 dark:bg-black/95 shell-shadow border-none p-6 z-50 animate-in slide-in-from-bottom-8">
-          <div className="flex justify-between items-center mb-4 border-b border-white/10 pb-3">
-            <div className="flex items-center gap-2 text-indigo-400 font-bold">
-              <Brain className="h-5 w-5" />
-              AI 诊断报告
+      <AnimatePresence>
+        {showAiAnalysis && aiFeedback && (
+          <motion.div 
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 50, scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            className="fixed bottom-8 right-8 w-96 glass bg-slate-900/95 dark:bg-[#0d1117]/95 shell-shadow border border-indigo-500/30 p-0 z-50 overflow-hidden"
+          >
+            {/* 顶栏 */}
+            <div className="flex justify-between items-center px-5 py-3 border-b border-indigo-500/20 bg-indigo-500/10">
+              <div className="flex items-center gap-2 text-indigo-400 font-bold text-sm tracking-wide">
+                <Sparkles className="h-4 w-4" />
+                AI 诊断助手
+              </div>
+              <button onClick={() => setShowAiAnalysis(false)} className="text-white/40 hover:text-white transition-colors bg-white/5 hover:bg-white/10 p-1.5 rounded-md">✕</button>
             </div>
-            <button onClick={() => setShowAiAnalysis(false)} className="text-white/40 hover:text-white/80 transition-colors">✕</button>
-          </div>
-          <div className="prose prose-sm prose-invert mt-2 text-white/80 leading-relaxed max-h-[60vh] overflow-y-auto app-scrollbar pr-2">
-            {aiFeedback.split('\n').map((line, i) => (
-               <p key={i} className="my-1">{line}</p>
-            ))}
-          </div>
-        </div>
-      )}
+            
+            {/* 内容区 */}
+            <div className="p-5 prose prose-sm prose-invert text-slate-300 leading-relaxed max-h-[60vh] overflow-y-auto app-scrollbar">
+              {aiFeedback.split('\n').map((line, i) => {
+                 if (line.includes('**')) {
+                   const parts = line.split('**');
+                   return (
+                     <p key={i} className="my-1.5">
+                       {parts.map((p, idx) => idx % 2 === 1 ? <strong key={idx} className="text-indigo-300 font-bold">{p}</strong> : p)}
+                     </p>
+                   )
+                 }
+                 return <p key={i} className="my-1">{line}</p>
+              })}
+            </div>
+            
+            {/* 装饰条 */}
+            <div className="h-1 w-full bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-indigo-500"></div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
